@@ -1,0 +1,52 @@
+/* General container styling */
+.group-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.group-container h1 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Loading and error message styling */
+.group-loading-message,
+.group-error-message {
+    font-size: 1.2em;
+    color: #e74c3c;
+}
+
+/* List styling */
+.group-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.group-container li {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1.1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Group name styling */
+.group-container li h2 {
+    font-size: 1.5em;
+    color: #333;
+}
+
+/* No groups message styling */
+.group-container .no-groups {
+    font-size: 1.2em;
+    color: #7f8c8d;
+    font-style: italic;
+}
