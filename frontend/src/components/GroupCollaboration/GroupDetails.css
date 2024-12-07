@@ -1,0 +1,166 @@
+/* GroupDetails.css */
+
+/* General container styling */
+.group-details-container {
+    padding: 30px;
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .group-details-container h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    text-align: center;
+  }
+  
+  .group-details-container p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #7f8c8d;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  
+  /* Section titles */
+  .group-details-container h3 {
+    font-size: 1.8rem;
+    margin-top: 30px;
+    font-weight: 600;
+    color: #34495e;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+  }
+  
+  /* List styles for resources and discussions */
+  .group-details-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .group-details-container li {
+    margin-bottom: 20px;
+  }
+  
+  /* Resource link styles */
+  .group-details-container a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  .group-details-container a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+  }
+  
+  .group-details-container .resource-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  
+  .group-details-container .resource-link:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Loading and error messages */
+  .group-details-container .loading-message,
+  .group-details-container .error-message {
+    font-size: 1.2rem;
+    color: #e74c3c;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .group-details-container .error-message {
+    color: #c0392b;
+  }
+  
+  /* Discussion item styling */
+  .group-details-container .discussion-item {
+    margin-bottom: 20px;
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .group-details-container .discussion-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .group-details-container .discussion-item h4 {
+    font-size: 1.4rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+  }
+  
+  .group-details-container .discussion-item p {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    line-height: 1.6;
+  }
+  
+  .group-details-container .comments-list {
+    margin-top: 15px;
+    padding-left: 20px;
+  }
+  
+  .group-details-container .comment-item {
+    margin-top: 12px;
+    padding: 12px;
+    background-color: #f4f6f7;
+    border-radius: 5px;
+  }
+  
+  .group-details-container .comment-item p {
+    font-size: 1.1rem;
+    color: #34495e;
+  }
+  
+  /* Responsive design */
+  @media screen and (max-width: 768px) {
+    .group-details-container {
+      padding: 20px;
+      margin: 20px;
+    }
+  
+    .group-details-container h2 {
+      font-size: 2rem;
+    }
+  
+    .group-details-container h3 {
+      font-size: 1.6rem;
+    }
+  
+    .group-details-container .resource-link {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+  
+    .group-details-container .discussion-item {
+      padding: 15px;
+    }
+  
+    .group-details-container .comment-item {
+      padding: 10px;
+    }
+  }
+  

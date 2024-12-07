@@ -21,6 +21,7 @@ const Navbar = () => {
         <h1 className="navbar-brand">BrainBox</h1>
       </div>
       <ul className="navbar-links">
+        <li className="navbar-item"><Link to="/dashboard" className="navbar-link">Dashboard</Link></li>
         <li className="navbar-item"><Link to="/groups" className="navbar-link">Groups</Link></li>
         <li className="navbar-item"><Link to="/resources" className="navbar-link">Resources</Link></li>
         <li className="navbar-item"><Link to="/progress" className="navbar-link">Progress</Link></li>
