@@ -6,8 +6,15 @@ const groupSchema = new mongoose.Schema({
   description: { type: String },
   resources: [
     {
-      resourceId: { type: mongoose.Schema.Types.ObjectId, default: mongoose.Types.ObjectId },  // Unique ID for the resource within the group
-      type: { type: String, required: true, enum: ['pdf', 'link', 'note'] },  // Define resource type (PDF, link, note)
+      resourceId: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        default: () => new mongoose.Types.ObjectId()  // Auto-generate resourceId
+      },
+      type: { 
+        type: String, 
+        required: true, 
+        enum: ['pdf', 'link', 'note']  // Define resource type (PDF, link, note)
+      },
       url: { type: String },  // URL for links (e.g., external links)
       filePath: { type: String },  // Path for PDF or note files (if uploaded locally)
       description: { type: String },  // Optional description for the resource
@@ -27,14 +34,14 @@ const groupSchema = new mongoose.Schema({
           createdAt: { type: Date, default: Date.now },
         }
       ]
-    },],
-    members: [  // New field to store members of the group
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: 'Student'  // Referencing the Student model
-        }
-      ]
-  
+    }
+  ],
+  members: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Student'  // Referencing the Student model
+    }
+  ]
 });
 
 module.exports = mongoose.model('Group', groupSchema);

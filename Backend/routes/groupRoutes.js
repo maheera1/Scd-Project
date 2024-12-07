@@ -110,17 +110,20 @@ router.post('/:groupId/discussions', protect, async (req, res) => {
     // Retrieve the group by ID
     const group = await Group.findById(req.params.groupId);
     if (!group) {
+      console.error(`Group not found: ${req.params.groupId}`);
       return res.status(404).json({ message: 'Group not found' });
     }
 
     // Find the student from the JWT token
     const student = await Student.findById(req.student._id);  // Using the student ID from the decoded token
     if (!student) {
+      console.error(`Student not found: ${req.student._id}`);
       return res.status(404).json({ message: 'Student not found' });
     }
 
     // Check if the student has joined the group
     if (!student.groupId.includes(group._id)) {
+      console.error(`Student ${req.student._id} has not joined group ${group._id}`);
       return res.status(403).json({ message: 'You must join the group before creating a discussion' });
     }
 
@@ -128,6 +131,7 @@ router.post('/:groupId/discussions', protect, async (req, res) => {
     const { title, body } = req.body;
 
     if (!title || !body) {
+      console.error("Title or body is missing");
       return res.status(400).json({ message: 'Title and body are required' });
     }
 
@@ -144,7 +148,7 @@ router.post('/:groupId/discussions', protect, async (req, res) => {
 
     res.status(201).json(newDiscussion);
   } catch (error) {
-    console.error(error);
+    console.error('Error creating discussion:', error); // Log the full error
     res.status(500).json({ message: 'Error creating discussion' });
   }
 });
