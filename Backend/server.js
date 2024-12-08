@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
 const authRoutes = require('./routes/authRoutes'); // Import auth routes
-
+const notesRoutes = require('./routes/notesRoutes'); 
 const app = express();
 
 // Middleware
@@ -33,7 +33,7 @@ app.use('/api/students', studentRoutes);
 const groupRoutes = require('./routes/groupRoutes');
 
 app.use('/api/groups', groupRoutes); // Prefix all group routes with /api/groups
-
+app.use('/api/notes', notesRoutes); 
 
 // Start Server
 const PORT = process.env.PORT || 5000;

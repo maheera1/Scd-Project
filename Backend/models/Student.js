@@ -13,6 +13,20 @@ const studentSchema = new mongoose.Schema({
       resourceIndex: { type: Number, required: true }, // Index of the resource in the group's resources array
     }
   ],
+  notes: [
+    {
+      title: { type: String, required: true },
+      content: { type: String, required: true },
+      tags: [String], // Tags for easy categorization (e.g., subject, session)
+      createdBy: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Student', // Reference to the student who created the note
+        required: true
+      },
+      createdAt: { type: Date, default: Date.now },
+      updatedAt: { type: Date, default: Date.now },
+    }
+  ],
 });
 
 
