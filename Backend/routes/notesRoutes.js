@@ -31,14 +31,17 @@ router.post('/createNote', protect, async (req, res) => {
       // Save the student document with the new note added
       await student.save();
   
-      // Return success response with the new note data
-      res.status(201).json({ message: 'Note created successfully', note: newNote });
+      // Retrieve the newly created note with the _id from the student's notes
+      const updatedStudent = await Student.findById(studentId);
+      const note = updatedStudent.notes[updatedStudent.notes.length - 1];  // Get the last note added
+  
+      // Return success response with the new note data including _id
+      res.status(201).json({ message: 'Note created successfully', note });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Server error' });
     }
   });
-  
   
 
 // Update a note
@@ -73,7 +76,7 @@ router.put('/updateNote/:noteId', protect, async (req, res) => {
   });
   
 // Delete a note
-// Delete a note
+
 router.delete('/deleteNote/:noteId', protect, async (req, res) => {
     const { noteId } = req.params;
     const studentId = req.student._id;  // Get student ID from the token

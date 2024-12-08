@@ -23,6 +23,7 @@ const Navbar = () => {
       <ul className="navbar-links">
         <li className="navbar-item"><Link to="/dashboard" className="navbar-link">Dashboard</Link></li>
         <li className="navbar-item"><Link to="/groups" className="navbar-link">Groups</Link></li>
+        <li className="navbar-item"><Link to="/notes" className="navbar-link">Notes</Link></li>
         <li className="navbar-item"><Link to="/resources" className="navbar-link">Resources</Link></li>
         <li className="navbar-item"><Link to="/progress" className="navbar-link">Progress</Link></li>
         <li className="navbar-item"><Link to="/notifications" className="navbar-link">Notifications</Link></li>

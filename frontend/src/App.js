@@ -12,6 +12,7 @@ import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import Groups from './components/GroupCollaboration/groups';
 import CreateDiscussion from './components/GroupCollaboration/CreateDiscussion';
+import NotesPage from './components/notes/NotesPage';
 import './App.css';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/groups" element={<ProtectedRoute><Groups /></ProtectedRoute>} />
           <Route path="/groups/:groupId" element={<ProtectedRoute><GroupDetails /></ProtectedRoute>} /> {/* Updated path */}
+          <Route path="/notes" element={<ProtectedRoute><NotesPage /></ProtectedRoute>} />
           <Route path="/resources" element={<ProtectedRoute><ResourceList /></ProtectedRoute>} />
           <Route path="/groups/:groupId/create-discussion" element={<CreateDiscussion />} />
           <Route path="/resources/:id" element={<ProtectedRoute><ResourceDetails /></ProtectedRoute>} />

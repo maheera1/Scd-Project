@@ -1,0 +1,112 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Notes Page Wrapper */
+  .notes-page {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #f4f6f9;
+  }
+  
+  /* Title */
+  .notes-page h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Add Note Form */
+  .notes-page h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  .notes-page input, .notes-page textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .notes-page input:focus, .notes-page textarea:focus {
+    border-color: #007BFF;
+    outline: none;
+  }
+  
+  .notes-page textarea {
+    height: 150px;
+    resize: vertical;
+  }
+  
+  .notes-page button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .notes-page button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Notes List */
+  .notes-page h3 {
+    font-size: 24px;
+    margin-top: 30px;
+    color: #333;
+  }
+  
+  .notes-page p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555;
+  }
+  
+  .notes-page small {
+    font-size: 14px;
+    color: #888;
+  }
+  
+  .notes-page div > div {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .notes-page div > div:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Delete Button */
+  .notes-page button {
+    background-color: #ff4747;
+    padding: 6px 14px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .notes-page button:hover {
+    background-color: #d63636;
+  }
+  
