@@ -1,56 +1,145 @@
+/* General container for the register page */
 .register-container {
-    max-width: 400px;
-    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #eef2f5; /* Light background from palette */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Left side - Logo section */
+.register-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;  /* 50% width for the logo side */
+    padding: 0 20px;
+}
+
+.register-logo {
+    width: 400px;  /* Increased logo size */
+    height: 400px;  /* Equal height to make it round */
+    border-radius: 50%;  /* Makes the logo round */
+    object-fit: cover;  /* Ensures the logo fits the circle without distortion */
+}
+
+/* Right side - Register form section */
+.register-form-container {
+    width: 50%;  /* 50% width for the form side */
     padding: 20px;
-    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-header {
+    font-size: 36px;
+    color: #3174b5; /* Deep blue from palette */
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Styling for the register form */
+.register-form {
+    background-color: white;
+    padding: 40px;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .register-container h2 {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    box-sizing: border-box;
     text-align: center;
-    font-size: 2rem;
+}
+
+/* Input field styling */
+.input-group {
     margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    font-size: 1.1rem;
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .form-group input {
+    position: relative;
+}
+
+.register-input {
     width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
+    padding: 14px;
+    font-size: 16px;
+    border: 1px solid #bae4f8; /* Light blue border from palette */
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.register-input:focus {
+    border-color: #3174b5; /* Deep blue on focus */
+}
+
+/* Button styling */
+.register-btn {
     width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
+    padding: 14px;
+    background-color: #7dd3f7; /* Light blue background from palette */
     color: white;
-    font-size: 1.1rem;
+    font-size: 16px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  .error-message {
+    transition: all 0.3s ease;
+}
+
+.register-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.register-btn:hover {
+    background-color: #3174b5; /* Darker blue on hover */
+}
+
+/* Success and error message styles */
+.message-success {
+    color: #5d50a2; /* Purple for success message from palette */
+    margin-top: 10px;
+}
+
+.message-error {
     color: red;
-    font-size: 1rem;
-    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 600px) {
+    .register-container {
+        flex-direction: column;  /* Stack elements vertically on small screens */
+    }
+
+    .register-logo-container {
+        width: 100%;  /* Full width for logo */
+        margin-bottom: 20px;  /* Space between logo and form */
+    }
+
+    .register-form-container {
+        width: 100%;  /* Full width for form */
+    }
+
+    .register-header {
+        font-size: 28px;
+    }
+}
+
+/* Link to login page */
+.signup-link-container {
+    margin-top: 15px;
     text-align: center;
-  }
-  
+}
+
+.signup-link {
+    color: #3174b5; /* Deep blue for the link */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
+}

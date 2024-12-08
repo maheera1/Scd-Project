@@ -1,97 +1,111 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerUser } from '../../api';  // Import the register API call function
+import { Link } from 'react-router-dom';
+import { registerUser } from '../../api'; // Assuming registerUser is a function in your API module
+import './Register.css';  // Import the updated CSS for styling
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-    name: '',
-    email: ''
-  });
+  const [formData, setFormData] = useState({ username: '', password: '', name: '', email: '' });
+  const [message, setMessage] = useState('');  // For feedback messages
+  const [loading, setLoading] = useState(false);  // To handle loading state
+  const [error, setError] = useState('');  // For displaying errors
+  const navigate = useNavigate();  // For navigation
 
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-
-  // Handle form input changes
+  // Handling input change
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle form submission
+  // Handling form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);  // Set loading to true to disable submit button
 
     try {
-      const response = await registerUser(formData);
-      localStorage.setItem('token', response.data.token);  // Save JWT token in localStorage
-      navigate('/dashboard');  // Redirect to dashboard after successful registration
+      const response = await registerUser(formData);  // Assuming registerUser is your API function
+      setMessage('Registration successful. Redirecting to login...');
+      setError('');  // Reset error message on successful registration
+
+      // Redirect to the login page with a slight delay
+      setTimeout(() => {
+        navigate('/login');  // Use navigate to redirect
+      }, 1000); // Slight delay before navigating
+
     } catch (error) {
-      setError(error.response?.data?.message || 'Registration failed');
+      setMessage('');  // Reset success message on error
+      setError(error.response?.data?.message || 'An error occurred during registration.');
+    } finally {
+      setLoading(false);  // Reset loading state after request finishes
     }
   };
 
   return (
     <div className="register-container">
-      <h2>Sign Up</h2>
+      {/* Left side for logo */}
+      <div className="register-logo-container">
+        <img src="/logo.jpg" alt="Logo" className="register-logo" />
+      </div>
 
-      {error && <div className="error-message">{error}</div>}
+      {/* Right side for register form */}
+      <div className="register-form-container">
+        <h2 className="register-header">Register</h2>
+        <form onSubmit={handleSubmit} className="register-form">
+          <div className="input-group">
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+              className="register-input"
+            />
+          </div>
+          <div className="input-group">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="register-input"
+            />
+          </div>
+          <div className="input-group">
+            <input
+              type="text"
+              name="name"
+              placeholder="Full Name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="register-input"
+            />
+          </div>
+          <div className="input-group">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="register-input"
+            />
+          </div>
+          <button type="submit" className="register-btn" disabled={loading}>
+            {loading ? 'Registering...' : 'Register'}
+          </button>
+        </form>
+        {message && <p className="message-success">{message}</p>}
+        {error && <p className="message-error">{error}</p>}
 
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
+        {/* Link to the login page */}
+        <div className="signup-link-container">
+          <p>Already have an account? <Link to="/login" className="signup-link">Login</Link></p>
         </div>
-
-        <div className="form-group">
-          <label htmlFor="name">Full Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <button type="submit">Register</button>
-      </form>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';  // Import Link from react-router-dom
 import { loginUser } from '../../api';  // Assuming loginUser is a function in your API module
 import './Login.css';  // Import the updated CSS for styling
 
@@ -88,8 +88,15 @@ const Login = () => {
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
+
+        {/* Success or error messages */}
         {message && <p className="message-success">{message}</p>}
         {error && <p className="message-error">{error}</p>}
+
+        {/* Link to the signup page */}
+        <div className="signup-link-container">
+          <p>Don't have an account? <Link to="/register" className="signup-link">Sign up</Link></p>
+        </div>
       </div>
     </div>
   );
