@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Group = require('./models/Group'); 
+const Group = require('./models/Group');
 require('dotenv').config();
 
 const seedGroups = async () => {
@@ -7,66 +7,38 @@ const seedGroups = async () => {
     await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
     const groups = [
+      
       {
-        name: 'Advanced Math Group',  
-        code: 'MATH1289',
-        description: 'A group for advanced math discussions and resources',
+        name: 'Web engineering',
+        code: 'WEB202',
+        description: 'Discussion group for web developers',
         resources: [
           {
-            resourceId: new mongoose.Types.ObjectId(),  
-            type: 'link', 
-            url: 'http://example.com/resource1',  
-          },
-          {
-            resourceId: new mongoose.Types.ObjectId(),  
-            type: 'pdf',  
-            filePath: '/uploads/resource1.pdf',  
-            description: 'Advanced Math Lecture Notes',
-          }
-        ],
-      },
-      {
-        name: 'Physics Enthusiasts Club',  
-        code: 'PHY456',
-        description: 'A club for physics lovers and learners',
-        resources: [
-          {
-            resourceId: new mongoose.Types.ObjectId(), 
+            resourceId: new mongoose.Types.ObjectId(),
             type: 'link',
-            url: 'http://example.com/resource2',
+            url: 'https://blog.hubspot.com/website/website-development',
           },
           {
-            resourceId: new mongoose.Types.ObjectId(), 
+            resourceId: new mongoose.Types.ObjectId(),
             type: 'pdf',
-            filePath: '/uploads/resource2.pdf',
-            description: 'Physics Article for Enthusiasts',
-          }
-        ],
-      },
-      {
-        name: 'Science Knowledge Hub',  
-        code: 'SCI789',
-        description: 'A hub for sharing and discussing science resources',
-        resources: [
-          {
-            resourceId:new mongoose.Types.ObjectId(),  
-            type: 'link',
-            url: 'http://example.com/resource3',
-          },
-          {
-            resourceId:new mongoose.Types.ObjectId(),  
-            type: 'pdf',
-            filePath: '/uploads/resource3.pdf',
-            description: 'Comprehensive Science Study Material',
+            filePath: '/uploads/web.pdf',
+            description: 'Advanced web dev  Notes',
           }
         ],
       }
     ];
 
-    
-    await Group.insertMany(groups);  
+    for (const group of groups) {
+      const existingGroup = await Group.findOne({ code: group.code });
+      if (existingGroup) {
+        console.log(`Group with code ${group.code} already exists. Skipping.`);
+      } else {
+        await Group.create(group);
+        console.log(`Group ${group.name} added successfully!`);
+      }
+    }
 
-    console.log('Groups seeded successfully!');
+    console.log('Group seeding completed!');
     process.exit(0);
   } catch (error) {
     console.error('Error seeding groups:', error);
