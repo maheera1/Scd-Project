@@ -8,10 +8,11 @@
   
   /* Notes Page Wrapper */
   .notes-page {
-    padding: 20px;
+    padding: 30px;
     max-width: 1000px;
     margin: 0 auto;
-    background-color: #f4f6f9;
+    background-color: #f7f7f7;
+    border-radius: 10px;
   }
   
   /* Title */
@@ -19,57 +20,63 @@
     font-size: 32px;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 20px;
-    color: #333;
+    margin-bottom: 30px;
+    color: #2c3e50;
   }
   
   /* Add Note Form */
   .notes-page h3 {
     font-size: 24px;
     margin-bottom: 10px;
-    color: #555;
+    color: #34495e;
   }
   
-  .notes-page input, .notes-page textarea {
+  .notes-page input,
+  .notes-page textarea {
     width: 100%;
-    padding: 10px;
+    padding: 15px;
     margin-bottom: 15px;
-    border-radius: 5px;
+    border-radius: 8px;
     border: 1px solid #ddd;
     font-size: 16px;
     transition: border-color 0.3s ease;
+    background-color: #fff;
   }
   
-  .notes-page input:focus, .notes-page textarea:focus {
-    border-color: #007BFF;
+  .notes-page input:focus,
+  .notes-page textarea:focus {
+    border-color: #3498db;
     outline: none;
   }
   
+  /* Textarea */
   .notes-page textarea {
     height: 150px;
     resize: vertical;
   }
   
+  /* Add/Update Button */
   .notes-page button {
-    padding: 10px 20px;
+    padding: 12px 30px;
     font-size: 16px;
-    background-color: #007BFF;
+    background-color: #3498db;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
   }
   
   .notes-page button:hover {
-    background-color: #0056b3;
+    background-color: #2980b9;
+    transform: scale(1.05);
   }
   
   /* Notes List */
   .notes-page h3 {
     font-size: 24px;
-    margin-top: 30px;
-    color: #333;
+    margin-top: 40px;
+    color: #2c3e50;
   }
   
   .notes-page p {
@@ -86,27 +93,62 @@
   .notes-page div > div {
     background-color: #fff;
     padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 8px;
+    margin-bottom: 20px;
+    border-radius: 10px;
     border: 1px solid #ddd;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
   }
   
   .notes-page div > div:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+  }
+  
+  /* Button Group (Edit, Delete) */
+  .notes-page .button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .notes-page .button-group button {
+    padding: 8px 20px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* Edit Button */
+  .notes-page .edit-btn {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+  }
+  
+  .notes-page .edit-btn:hover {
+    background-color: #27ae60;
   }
   
   /* Delete Button */
-  .notes-page button {
-    background-color: #ff4747;
-    padding: 6px 14px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  .notes-page .delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
   }
   
-  .notes-page button:hover {
-    background-color: #d63636;
+  .notes-page .delete-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Icons for buttons */
+  .notes-page .edit-btn i,
+  .notes-page .delete-btn i {
+    font-size: 16px;
+    margin-right: 6px;
   }
   
