@@ -5,6 +5,7 @@ const cors = require('cors');
 const path = require('path');
 const authRoutes = require('./routes/authRoutes'); // Import auth routes
 const notesRoutes = require('./routes/notesRoutes'); 
+const notificationRoutes = require('./routes/notifications'); 
 
 const app = express();
 
@@ -35,6 +36,7 @@ const groupRoutes = require('./routes/groupRoutes');
 
 app.use('/api/groups', groupRoutes); // Prefix all group routes with /api/groups
 app.use('/api/notes', notesRoutes); 
+app.use('/api/notification', notificationRoutes); 
 
 // Start Server
 const PORT = process.env.PORT || 5000;
