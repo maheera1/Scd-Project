@@ -1,19 +1,22 @@
 /* General container styling */
 .group-details-container {
-    padding: 30px;
+    padding: 25px;
     max-width: 900px;
-    margin: 40px auto;
-    background-color: #fff;
+    margin: 30px auto;
+    background-color: #eef2f5; /* Light grayish-blue */
     border-radius: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1); /* More depth to the container */
     font-family: 'Arial', sans-serif;
     animation: fadeIn 0.6s ease-out;
+    transition: all 0.3s ease;
 }
-.group-details-container ul {
-    list-style-type: none;
-    padding-left: 0; /* Ensure there's no additional padding */
-  }
-  
+
+/* Hover effect for container */
+.group-details-container:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px); /* Slight elevation on hover */
+}
+
 /* Animation */
 @keyframes fadeIn {
     0% { opacity: 0; }
@@ -22,18 +25,19 @@
 
 /* Group title and description */
 .group-details-container h2 {
-    font-size: 2.8rem;
+    font-size: 2.4rem;
     font-weight: 700;
-    color: #3d3d3d;
+    color: #3174b5; /* Blue from palette */
     text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     letter-spacing: 1px;
     font-family: 'Helvetica Neue', sans-serif;
 }
 
+/* Description text */
 .group-details-container p {
-    font-size: 1.3rem;
-    line-height: 1.8;
+    font-size: 1.2rem;
+    line-height: 1.6;
     color: #7f8c8d;
     text-align: center;
     margin-bottom: 25px;
@@ -42,12 +46,12 @@
 
 /* Section titles */
 .group-details-container h3 {
-    font-size: 2rem;
-    margin-top: 30px;
+    font-size: 1.8rem;
+    margin-top: 25px;
     font-weight: 600;
     color: #3498db;
     border-bottom: 3px solid #3498db;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
     transition: all 0.3s ease;
 }
 
@@ -59,24 +63,24 @@
 
 /* Discussion item styling */
 .group-details-container .discussion-item {
-    margin-bottom: 25px;
-    background-color: #f1f3f5;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     position: relative;
     transition: all 0.3s ease;
 }
 
 /* Hover effect for discussion items */
 .group-details-container .discussion-item:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     transform: translateY(-8px);
 }
 
 /* Discussion title and body */
 .group-details-container .discussion-item h4 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: #2c3e50;
     margin-bottom: 12px;
     font-weight: 600;
@@ -85,13 +89,13 @@
 .group-details-container .discussion-item p {
     font-size: 1.1rem;
     color: #7f8c8d;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 /* New discussion form styling */
 .create-discussion-form {
-    padding: 30px;
-    background-color: #f7f9f9;
+    padding: 25px;
+    background-color: #bae4f8; /* Light blue from palette */
     border-radius: 15px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 25px;
@@ -100,50 +104,55 @@
 
 /* Hover effect on the form */
 .create-discussion-form:hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     transform: translateY(-5px);
 }
 
 .create-discussion-form h3 {
-    font-size: 1.8rem;
-    color: #3498db;
+    font-size: 1.7rem;
+    color: #3174b5; /* Darker blue for the form header */
     margin-bottom: 20px;
     font-weight: bold;
 }
 
+/* Input and textarea styling */
 .create-discussion-form input,
 .create-discussion-form textarea {
-    padding: 15px;
-    font-size: 1.2rem;
+    padding: 12px;
+    font-size: 1.1rem;
     border-radius: 8px;
     border: 1px solid #ccc;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     transition: all 0.3s ease;
-    background-color: #fff;
+    background-color: #ffffff;
     color: #34495e;
 }
 
+/* Focused input and textarea */
 .create-discussion-form input:focus,
 .create-discussion-form textarea:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+    border-color: #7dd3f7; /* Lighter blue focus effect */
+    box-shadow: 0 0 8px rgba(125, 211, 247, 0.3); /* Soft glowing focus */
 }
 
+/* Button styling */
 .create-discussion-form button {
-    padding: 12px 20px;
-    background-color: #3498db;
+    padding: 12px 18px;
+    background-color: #3174b5; /* Main blue for buttons */
     color: #fff;
     border: none;
     border-radius: 6px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
+/* Hover effect on button */
 .create-discussion-form button:hover {
     background-color: #2980b9;
 }
 
+/* Disabled button */
 .create-discussion-form button:disabled {
     background-color: #7f8c8d;
     cursor: not-allowed;
@@ -154,15 +163,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 15px;
-    padding: 10px;
+    margin-top: 12px;
+    padding: 12px;
     border-radius: 12px;
     background-color: #fff;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Input for adding comments */
 .group-details-container .add-comment input {
-    width: 80%;
+    width: 78%;
     padding: 12px;
     border-radius: 8px;
     border: 1px solid #ddd;
@@ -172,66 +182,73 @@
     transition: all 0.3s ease;
 }
 
+/* Focus effect on comment input */
 .group-details-container .add-comment input:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+    border-color: #7dd3f7; /* Light blue for focused comment input */
+    box-shadow: 0 0 8px rgba(125, 211, 247, 0.3); /* Soft glowing effect */
 }
 
+/* Comment button */
 .group-details-container .add-comment button {
-    width: 18%;
+    width: 20%;
     padding: 12px;
-    background-color: #3498db;
+    background-color: #7dd3f7; /* Lighter blue for comment button */
     color: #fff;
     border-radius: 8px;
     font-size: 1.1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
+/* Hover effect for comment button */
 .group-details-container .add-comment button:hover {
-    background-color: #2980b9;
+    background-color: #5d50a2; /* Purple hover for a distinct effect */
 }
 
 /* Comments List */
 .group-details-container .comments-list {
-    margin-top: 15px;
-    padding-left: 25px;
+    margin-top: 18px;
+    padding-left: 20px;
     padding-bottom: 20px;
 }
 
+/* Comment item styling */
 .group-details-container .comment-item {
-    margin-top: 12px;
+    margin-top: 10px;
     padding: 18px;
     background-color: #ecf0f1;
     border-radius: 12px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
+/* Hover effect on comment item */
 .group-details-container .comment-item:hover {
     background-color: #f0f4f7;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
+/* Comment text */
 .group-details-container .comment-item p {
     color: #34495e;
 }
 
+/* Comment metadata */
 .group-details-container .comment-item small {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #7f8c8d;
     font-style: italic;
 }
 
-/* Buttons */
+/* Button at the bottom of the container */
 .group-details-container button {
-    padding: 12px 20px;
-    background-color: #3498db;
+    padding: 12px 18px;
+    background-color: #3174b5;
     color: #fff;
     border: none;
     border-radius: 8px;
-    font-size: 1.1rem;
+    font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -240,19 +257,25 @@
     background-color: #2980b9;
 }
 
+/* Remove list dots */
+.group-details-container ul {
+    list-style: none; /* Hide list dots */
+    padding-left: 0;
+}
+
 /* Responsive design */
 @media screen and (max-width: 768px) {
     .group-details-container {
-        padding: 20px;
+        padding: 18px;
         margin: 20px;
     }
 
     .group-details-container h2 {
-        font-size: 2.3rem;
+        font-size: 2rem;
     }
 
     .group-details-container h3 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
     }
 
     .create-discussion-form input,
@@ -265,6 +288,14 @@
     }
 
     .group-details-container .comment-item {
-        padding: 12px;
+        padding: 15px;
+    }
+
+    .group-details-container .add-comment input {
+        font-size: 1rem;
+    }
+
+    .group-details-container .add-comment button {
+        font-size: 1rem;
     }
 }

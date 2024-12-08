@@ -1,81 +1,108 @@
+/* Container Styling */
 .create-discussion-container {
     padding: 20px;
     max-width: 600px;
     margin: auto;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .create-discussion-container h2 {
+    background-color: #eef2f5; /* Light background for container */
+    border-radius: 12px; /* Rounded corners for a soft, modern feel */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Deeper shadow for elevation */
+    transition: box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth transition effects */
+}
+
+/* Header Styling */
+.create-discussion-container h2 {
     text-align: center;
-    font-size: 2rem;
-    color: #2c3e50;
-    margin-bottom: 20px;
-  }
-  
-  .create-discussion-container form {
+    font-size: 2.2rem;
+    color: #3174b5; /* Use blue from palette */
+    margin-bottom: 25px;
+    font-weight: 600;
+    text-transform: uppercase; /* For a bolder, more impactful title */
+    letter-spacing: 1px; /* Adds spacing between letters for a refined look */
+}
+
+/* Form Layout */
+.create-discussion-container form {
     display: flex;
     flex-direction: column;
-  }
-  
-  .create-discussion-container label {
+    gap: 15px; /* Adds space between form elements for better alignment */
+}
+
+/* Label Styling */
+.create-discussion-container label {
     margin: 5px 0;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: #34495e;
-  }
-  
-  .create-discussion-container input,
-  .create-discussion-container textarea {
-    padding: 10px;
-    margin: 10px 0;
+    font-weight: 500;
+}
+
+/* Input and Textarea Styling */
+.create-discussion-container input,
+.create-discussion-container textarea {
+    padding: 12px;
+    margin: 8px 0;
     font-size: 1rem;
-    border-radius: 4px;
+    border-radius: 6px; /* Rounded borders for inputs */
     border: 1px solid #ccc;
-    background-color: #fff;
+    background-color: #ffffff;
     color: #34495e;
-  }
-  
-  .create-discussion-container input:focus,
-  .create-discussion-container textarea:focus {
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.create-discussion-container input:focus,
+.create-discussion-container textarea:focus {
     outline: none;
-    border-color: #3498db;
-  }
-  
-  .create-discussion-container button {
-    padding: 10px 15px;
-    background-color: #3498db;
+    border-color: #7dd3f7; /* Light Blue for focused fields */
+    background-color: #bae4f8; /* Light background color on focus */
+}
+
+/* Button Styling */
+.create-discussion-container button {
+    padding: 12px 18px;
+    background-color: #3174b5; /* Primary Blue for buttons */
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .create-discussion-container button:hover {
-    background-color: #2980b9;
-  }
-  
-  .create-discussion-container button:disabled {
-    background-color: #aaa;
-  }
-  
-  .error-message {
-    color: red;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.create-discussion-container button:hover {
+    background-color: #2980b9; /* Darker Blue on hover */
+    transform: translateY(-3px); /* Subtle hover animation */
+}
+
+.create-discussion-container button:disabled {
+    background-color: #aaa; /* Disabled button with gray background */
+    cursor: not-allowed; /* Disable pointer cursor */
+}
+
+/* Error Message Styling */
+.error-message {
+    color: #e74c3c; /* Red color for errors */
     font-size: 1.2rem;
     text-align: center;
     margin-top: 15px;
-  }
-  
-  @media screen and (max-width: 768px) {
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
     .create-discussion-container {
-      padding: 15px;
-      max-width: 100%;
+        padding: 15px;
+        max-width: 100%;
     }
-  
+
     .create-discussion-container h2 {
-      font-size: 1.8rem;
+        font-size: 1.8rem; /* Slightly smaller title for smaller screens */
     }
-  }
-  
+
+    .create-discussion-container input,
+    .create-discussion-container textarea {
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+
+    .create-discussion-container button {
+        padding: 10px 15px; /* Adjust button padding for mobile */
+    }
+}

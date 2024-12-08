@@ -1,63 +1,108 @@
-/* Navbar.css */
-
 /* General Navbar Styling */
 .navbar {
-    background-color: #2c9294; /* Blue background */
+    background-color: #3174b5; /* Primary Blue */
     color: white;
     padding: 15px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Container for Brand and Logo */
-  .navbar-brand-container {
+    border-radius: 8px; /* Rounded corners for a sleek look */
+}
+
+/* Container for Brand and Logo */
+.navbar-brand-container {
     display: flex;
     align-items: center;
-  }
-  
-  /* Logo Styling */
-  .navbar-logo {
+}
+
+/* Logo Styling */
+.navbar-logo {
     width: 40px; /* Adjust logo size */
     height: 40px; /* Ensure it is square */
     margin-right: 10px; /* Space between logo and text */
     border-radius: 50%; /* Make the logo round */
     object-fit: cover; /* Maintain aspect ratio if image isn't square */
-  }
-  
-  /* Navbar Brand Styling */
-  .navbar-brand {
+}
+
+/* Navbar Brand Styling */
+.navbar-brand {
     font-size: 1.8em;
     font-weight: bold;
     margin: 0;
-  }
-  
-  /* Navbar Links List */
-  .navbar-links {
+    color: #eef2f5; /* Light Gray for brand text */
+}
+
+/* Navbar Links List */
+.navbar-links {
     list-style: none;
     display: flex;
     margin: 0;
     padding: 0;
-  }
-  
-  /* Navbar Item Styling */
-  .navbar-item {
+}
+
+/* Navbar Item Styling */
+.navbar-item {
     margin-left: 20px;
-  }
-  
-  /* Link Styling */
-  .navbar-link {
+}
+
+/* Link Styling */
+.navbar-link {
     color: white;
     text-decoration: none;
     font-size: 1.2em;
-  }
-  
-  .navbar-link:hover {
+    transition: color 0.3s ease;
+}
+
+.navbar-link:hover {
     text-decoration: underline; /* Underline on hover */
-  }
-  
-  .navbar-item:first-child {
+    color: #7dd3f7; /* Light Blue for hover effect */
+}
+
+/* Navbar Item: First Child */
+.navbar-item:first-child {
     margin-left: 0; /* No left margin for the first item */
-  }
-  
+}
+
+/* Logout Button */
+.navbar-item button {
+    background: #5d50a2; /* Purple background for button */
+    border: none;
+    color: white;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.navbar-item button:hover {
+    background: #3174b5; /* Change to Primary Blue on hover */
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .navbar-brand-container {
+        margin-bottom: 15px; /* Space between logo and links */
+    }
+
+    .navbar-links {
+        flex-direction: column;
+        margin-top: 10px;
+    }
+
+    .navbar-item {
+        margin-left: 0;
+        margin-bottom: 10px; /* Space between items */
+    }
+
+    .navbar-item:last-child {
+        margin-bottom: 0; /* Remove margin from the last item */
+    }
+}

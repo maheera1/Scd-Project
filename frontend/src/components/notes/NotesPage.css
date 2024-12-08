@@ -3,152 +3,189 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  /* Notes Page Wrapper */
-  .notes-page {
-    padding: 30px;
-    max-width: 1000px;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Notes Page Wrapper */
+.notes-page {
+    padding: 40px 30px;
+    max-width: 1200px;
     margin: 0 auto;
-    background-color: #f7f7f7;
-    border-radius: 10px;
-  }
-  
-  /* Title */
-  .notes-page h2 {
-    font-size: 32px;
-    font-weight: bold;
+    background: linear-gradient(135deg, #eef2f5, #bae4f8); /* Updated with light colors */
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+.notes-page h2 {
+    font-size: 38px;
+    font-weight: 700;
     text-align: center;
-    margin-bottom: 30px;
-    color: #2c3e50;
-  }
-  
-  /* Add Note Form */
-  .notes-page h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #34495e;
-  }
-  
-  .notes-page input,
-  .notes-page textarea {
-    width: 100%;
-    padding: 15px;
+    margin-bottom: 20px;
+    color: #3174b5; /* Primary Blue */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+/* Add Note Form */
+.notes-page h3 {
+    font-size: 26px;
     margin-bottom: 15px;
-    border-radius: 8px;
+    color: #3174b5; /* Primary Blue */
+    font-weight: 600;
+    border-bottom: 2px solid #7dd3f7; /* Light Blue */
+    padding-bottom: 5px;
+    margin-top: 20px;
+}
+
+/* Input Fields */
+.notes-page input,
+.notes-page textarea {
+    width: 100%;
+    padding: 18px;
+    margin-bottom: 18px;
+    border-radius: 12px;
     border: 1px solid #ddd;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
+    font-size: 18px;
     background-color: #fff;
-  }
-  
-  .notes-page input:focus,
-  .notes-page textarea:focus {
-    border-color: #3498db;
+    transition: all 0.3s ease;
+}
+
+/* Focus effect on inputs */
+.notes-page input:focus,
+.notes-page textarea:focus {
+    border-color: #3174b5; /* Primary Blue */
     outline: none;
-  }
-  
-  /* Textarea */
-  .notes-page textarea {
-    height: 150px;
+    box-shadow: 0 0 8px rgba(49, 116, 181, 0.3); /* Primary Blue */
+}
+
+/* Textarea */
+.notes-page textarea {
+    height: 180px;
     resize: vertical;
-  }
-  
-  /* Add/Update Button */
-  .notes-page button {
-    padding: 12px 30px;
-    font-size: 16px;
-    background-color: #3498db;
+}
+
+/* Add/Update Button */
+.notes-page button {
+    padding: 16px 35px;
+    font-size: 18px;
+    background-color: #3174b5; /* Primary Blue */
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 30px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  .notes-page button:hover {
-    background-color: #2980b9;
-    transform: scale(1.05);
-  }
-  
-  /* Notes List */
-  .notes-page h3 {
+    box-shadow: 0 5px 10px rgba(49, 116, 181, 0.2); /* Primary Blue */
+}
+
+.notes-page button:hover {
+    background-color: #5d50a2; /* Purple */
+    transform: translateY(-2px);
+}
+
+/* Notes List */
+.notes-page h3 {
     font-size: 24px;
-    margin-top: 40px;
-    color: #2c3e50;
-  }
-  
-  .notes-page p {
+    margin-top: 50px;
+    color: #3174b5; /* Primary Blue */
+    font-weight: 600;
+}
+
+/* Note card container */
+.notes-page div > div {
+    background-color: #fff;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for notes */
+.notes-page div > div:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+}
+
+/* Note title and content */
+.notes-page h4 {
+    font-size: 22px;
+    color: #3174b5; /* Primary Blue */
+    margin-bottom: 10px;
+}
+
+.notes-page p {
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.6;
     color: #555;
-  }
-  
-  .notes-page small {
+    margin-bottom: 15px;
+}
+
+.notes-page small {
     font-size: 14px;
     color: #888;
-  }
-  
-  .notes-page div > div {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    transition: box-shadow 0.3s ease, transform 0.2s ease;
-  }
-  
-  .notes-page div > div:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transform: translateY(-5px);
-  }
-  
-  /* Button Group (Edit, Delete) */
-  .notes-page .button-group {
+}
+
+/* Button Group (Edit, Delete) */
+.notes-page .button-group {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     justify-content: flex-start;
     align-items: center;
-  }
-  
-  .notes-page .button-group button {
-    padding: 8px 20px;
-    font-size: 14px;
-    border-radius: 8px;
+}
+
+/* Button styling */
+.notes-page .button-group button {
+    padding: 10px 22px;
+    font-size: 16px;
+    border-radius: 25px;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 8px;
-  }
-  
-  /* Edit Button */
-  .notes-page .edit-btn {
-    background-color: #2ecc71;
+    gap: 10px;
+}
+
+/* Edit Button */
+.notes-page .edit-btn {
+    background-color: #7dd3f7; /* Light Blue */
     color: white;
     border: none;
-  }
-  
-  .notes-page .edit-btn:hover {
-    background-color: #27ae60;
-  }
-  
-  /* Delete Button */
-  .notes-page .delete-btn {
+}
+
+.notes-page .edit-btn:hover {
+    background-color: #3174b5; /* Primary Blue */
+}
+
+/* Delete Button */
+.notes-page .delete-btn {
     background-color: #e74c3c;
     color: white;
     border: none;
-  }
-  
-  .notes-page .delete-btn:hover {
+}
+
+.notes-page .delete-btn:hover {
     background-color: #c0392b;
-  }
-  
-  /* Icons for buttons */
-  .notes-page .edit-btn i,
-  .notes-page .delete-btn i {
-    font-size: 16px;
-    margin-right: 6px;
-  }
-  
+}
+
+/* Icons for buttons */
+.notes-page .edit-btn i,
+.notes-page .delete-btn i {
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+/* Add subtle animations */
+.notes-page button,
+.notes-page .edit-btn,
+.notes-page .delete-btn {
+    transform: scale(1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.notes-page button:hover,
+.notes-page .edit-btn:hover,
+.notes-page .delete-btn:hover {
+    transform: scale(1.05);
+}

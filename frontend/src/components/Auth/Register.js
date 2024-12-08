@@ -1,70 +1,97 @@
 import React, { useState } from 'react';
-import { registerUser } from '../../api';  // Importing the registerUser function from your API module
+import { useNavigate } from 'react-router-dom';
+import { registerUser } from '../../api';  // Import the register API call function
 
 const Register = () => {
-  const [formData, setFormData] = useState({ username: '', password: '', name: '', email: '' });
-  const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(false);  // Optional: To handle loading state
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+    name: '',
+    email: ''
+  });
 
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  // Handle form input changes
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);  // Set loading to true when starting the registration
 
     try {
-      const response = await registerUser(formData);  // Use registerUser from your API
-      setMessage('Registration successful. Please log in.');
+      const response = await registerUser(formData);
+      localStorage.setItem('token', response.data.token);  // Save JWT token in localStorage
+      navigate('/dashboard');  // Redirect to dashboard after successful registration
     } catch (error) {
-      setMessage(error.response?.data?.message || 'Error occurred during registration.');
-    } finally {
-      setLoading(false);  // Reset loading state after the request is finished
+      setError(error.response?.data?.message || 'Registration failed');
     }
   };
 
   return (
-    <div>
-      <h2>Register</h2>
+    <div className="register-container">
+      <h2>Sign Up</h2>
+
+      {error && <div className="error-message">{error}</div>}
+
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Registering...' : 'Register'}
-        </button>
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="name">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <button type="submit">Register</button>
       </form>
-      {message && <p>{message}</p>}
     </div>
   );
 };

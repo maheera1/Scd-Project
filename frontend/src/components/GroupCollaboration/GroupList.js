@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchGroups } from '../../api';
+import './GroupList.css'; // External CSS file for styling
 
 const GroupList = () => {
   const [groups, setGroups] = useState([]);
@@ -18,13 +19,22 @@ const GroupList = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Groups</h1>
-      <ul>
-        {groups.map((group) => (
-          <li key={group._id}>{group.name}</li>
-        ))}
-      </ul>
+    <div className="unique-group-list-container">
+      <h1 className="groups-title">Your Groups</h1>
+      {groups.length === 0 ? (
+        <p className="no-groups">No groups available. Please join a group!</p>
+      ) : (
+        <ul className="groups-list">
+          {groups.map((group) => (
+            <li key={group._id} className="group-item">
+              <div>
+                <h2>{group.name}</h2>
+                <p>{group.description || 'No description available'}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

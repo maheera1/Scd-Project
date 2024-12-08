@@ -1,7 +1,7 @@
 /* Overall container for the resource list */
 .resource-list {
     padding: 30px;
-    background-color: #f9fbfd;
+    background-color: #eef2f5; /* Light Gray */
     border-radius: 15px;
     max-width: 1200px;
     margin: 30px auto;
@@ -13,7 +13,7 @@
 .resource-list h2 {
     font-size: 36px;
     font-weight: 700;
-    color: #184d5e;
+    color: #3174b5; /* Primary Blue */
     margin-bottom: 30px;
     text-align: center;
     text-transform: uppercase;
@@ -27,7 +27,7 @@
     display: block;
     width: 80px;
     height: 4px;
-    background: #2c9294;
+    background: #7dd3f7; /* Light Blue */
     margin: 10px auto;
     border-radius: 2px;
 }
@@ -35,9 +35,9 @@
 /* Section headers for Not Done and Done */
 .resource-list h3 {
     font-size: 28px;
-    color: #2c9294;
+    color: #3174b5; /* Primary Blue */
     margin-bottom: 15px;
-    border-bottom: 2px solid #2c9294;
+    border-bottom: 2px solid #3174b5; /* Primary Blue */
     padding-bottom: 5px;
 }
 
@@ -66,7 +66,7 @@
 /* Styling for the group name */
 .resource-list .resource-item h4 {
     font-size: 22px;
-    color: #184d5e;
+    color: #3174b5; /* Primary Blue */
     margin: 0 0 10px;
     font-weight: bold;
 }
@@ -74,7 +74,7 @@
 /* Description text */
 .resource-list .resource-item p {
     font-size: 16px;
-    color: #7f8c8d;
+    color: #7f8c8d; /* Gray for text */
     margin: 10px 0;
     line-height: 1.5;
 }
@@ -97,48 +97,48 @@
 
 /* Styling for the View Resource link */
 .resource-list .resource-item a {
-    background-color: #007bff;
+    background-color: #3174b5; /* Primary Blue */
 }
 
 .resource-list .resource-item a:hover {
-    background-color: #0056b3;
+    background-color: #5d50a2; /* Purple */
     transform: scale(1.05);
 }
 
 /* Styling for the download button */
 .resource-list .resource-item .download-button {
-    background-color: #28a745;
+    background-color: #28a745; /* Green for download */
 }
 
 .resource-list .resource-item .download-button:hover {
-    background-color: #218838;
+    background-color: #218838; /* Darker Green */
     transform: scale(1.05);
 }
 
 /* Styling for the Mark as Done button */
 .resource-list .resource-item .mark-done-button {
-    background-color: #ffc107;
+    background-color: #ffc107; /* Yellow for Done */
 }
 
 .resource-list .resource-item .mark-done-button:hover {
-    background-color: #e0a800;
+    background-color: #e0a800; /* Darker Yellow */
     transform: scale(1.05);
 }
 
 /* Styling for the Mark as Not Done button */
 .resource-list .resource-item .mark-not-done-button {
-    background-color: #dc3545;
+    background-color: #dc3545; /* Red for Not Done */
 }
 
 .resource-list .resource-item .mark-not-done-button:hover {
-    background-color: #c82333;
+    background-color: #c82333; /* Darker Red */
     transform: scale(1.05);
 }
 
 /* Completed status label */
 .resource-list .resource-item span {
     display: inline-block;
-    background-color: #28a745;
+    background-color: #28a745; /* Green for Completed */
     color: #fff;
     font-size: 14px;
     font-weight: bold;
@@ -150,7 +150,7 @@
 /* Loading/Error messages */
 .resource-list .loading, .resource-list .error {
     font-size: 18px;
-    color: #e74c3c;
+    color: #e74c3c; /* Red for error */
     text-align: center;
     margin-top: 20px;
 }

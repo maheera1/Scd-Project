@@ -3,125 +3,124 @@
     max-width: 800px;
     margin: 50px auto;
     padding: 20px;
-    background: linear-gradient(135deg, #f9f9f9, #ffffff);
+    background: linear-gradient(135deg, #eef2f5, #ffffff); /* Light Gray to White */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     font-family: 'Poppins', sans-serif;
-  }
-  
-  /* Title Styling */
-  .bookmarks-container h2 {
+}
+
+/* Title Styling */
+.bookmarks-container h2 {
     font-size: 2rem;
-    color: #4A90E2;
+    color: #3174b5; /* Primary Blue */
     text-align: center;
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: bold;
-  }
-  
-  /* Bookmarks List */
-  .bookmarks-list {
+}
+
+/* Bookmarks List */
+.bookmarks-list {
     list-style: none;
     padding: 0;
     margin: 0;
-  }
-  
-  /* Bookmark Item */
-  .bookmark-item {
-    background: linear-gradient(135deg, #E3FDFD, #FFE6FA);
+}
+
+/* Bookmark Item */
+.bookmark-item {
+    background: linear-gradient(135deg, #bae4f8, #ffe6fa); /* Light Blue to Light Pink */
     margin-bottom: 15px;
     padding: 20px;
-    border: 2px solid #E6EAF0;
+    border: 2px solid #e6eaf0; /* Light Border */
     border-radius: 8px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
-  }
-  
-  .bookmark-item:hover {
+}
+
+.bookmark-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Highlight Effect */
-  .bookmark-item:before {
+}
+
+/* Highlight Effect */
+.bookmark-item:before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 10px;
-    background: #4A90E2;
+    background: #3174b5; /* Primary Blue */
     border-radius: 5px 0 0 5px;
-  }
-  
-  /* Group Name */
-  .bookmark-item h3 {
+}
+
+/* Group Name */
+.bookmark-item h3 {
     margin: 0;
     font-size: 1.5rem;
     color: #333;
     font-weight: 600;
     margin-bottom: 10px;
-  }
-  
-  /* Resource Description */
-  .bookmark-item p {
+}
+
+/* Resource Description */
+.bookmark-item p {
     font-size: 1rem;
-    color: #666;
+    color: #666; /* Dark Gray */
     margin: 0 0 10px;
     line-height: 1.6;
-  }
-  
-  /* Open Resource Button */
-  .bookmark-item a {
+}
+
+/* Open Resource Button */
+.bookmark-item a {
     display: inline-block;
     text-decoration: none;
     color: #fff;
-    background: #4A90E2;
+    background: #3174b5; /* Primary Blue */
     padding: 10px 20px;
     font-size: 1rem;
     border-radius: 5px;
     transition: background 0.3s ease;
-  }
-  
-  .bookmark-item a:hover {
-    background: #357ABD;
-  }
-  
-  /* Error Message */
-  .error {
-    color: #FF4C4C;
-    background: #FFECEC;
+}
+
+.bookmark-item a:hover {
+    background: #5d50a2; /* Purple on hover */
+}
+
+/* Error Message */
+.error {
+    color: #FF4C4C; /* Red */
+    background: #FFECEC; /* Light Red Background */
     padding: 15px;
-    border: 1px solid #FFB3B3;
+    border: 1px solid #FFB3B3; /* Lighter Red Border */
     border-radius: 5px;
     text-align: center;
     font-weight: bold;
     margin: 20px 0;
-  }
-  
-  /* Mobile Responsive */
-  @media (max-width: 600px) {
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
     .bookmarks-container {
-      padding: 15px;
+        padding: 15px;
     }
-  
+
     .bookmark-item {
-      padding: 15px;
+        padding: 15px;
     }
-  
+
     .bookmark-item h3 {
-      font-size: 1.2rem;
+        font-size: 1.2rem;
     }
-  
+
     .bookmark-item p {
-      font-size: 0.9rem;
+        font-size: 0.9rem;
     }
-  
+
     .bookmark-item a {
-      padding: 8px 15px;
-      font-size: 0.9rem;
+        padding: 8px 15px;
+        font-size: 0.9rem;
     }
-  }
-  
+}
