@@ -135,6 +135,48 @@ router.get('/students/:studentId', async (req, res) => {
   }
 });
 
+router.get('/resources', protect, async (req, res) => {
+  try {
+    // Find the student from the JWT token
+    const student = await Student.findById(req.student._id);
+    console.log('Student from JWT:', student); // Debug: Log student information
+    
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
 
+    // Find all groups the student is a member of
+    const groups = await Group.find({ _id: { $in: student.groupId } }).populate('members');
+    console.log('Groups the student is a member of:', groups); // Debug: Log groups found for the student
+    
+    if (!groups.length) {
+      return res.status(404).json({ message: 'No groups found for this student' });
+    }
+
+    // Collect all resources across the student's groups
+    const resources = groups.flatMap(group => 
+      group.resources.map(resource => ({
+        resourceId: resource.resourceId,
+        type: resource.type,
+        url: resource.url,
+        filePath: resource.filePath,
+        description: resource.description,
+        groupName: group.name, // Add the group name for context
+        groupId: group._id     // Add the group ID for reference
+      }))
+    );
+
+    console.log('All resources found:', resources); // Debug: Log all resources found across groups
+    
+    if (!resources.length) {
+      return res.status(404).json({ message: 'No resources found for your groups' });
+    }
+
+    res.status(200).json(resources);
+  } catch (error) {
+    console.error('Error fetching resources:', error); // Log full error details
+    res.status(500).json({ message: 'Error fetching resources' });
+  }
+});
 
 module.exports = router;

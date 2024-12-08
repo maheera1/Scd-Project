@@ -32,7 +32,7 @@ const App = () => {
           <Route path="/groups" element={<ProtectedRoute><Groups /></ProtectedRoute>} />
           <Route path="/groups/:groupId" element={<ProtectedRoute><GroupDetails /></ProtectedRoute>} /> {/* Updated path */}
           <Route path="/notes" element={<ProtectedRoute><NotesPage /></ProtectedRoute>} />
-          <Route path="/resources" element={<ProtectedRoute><ResourceList /></ProtectedRoute>} />
+          <Route path="/resources" element={<ProtectedRoute><ResourceList /></ProtectedRoute>} /> {/* Add ResourceList Route */}
           <Route path="/groups/:groupId/create-discussion" element={<CreateDiscussion />} />
           <Route path="/resources/:id" element={<ProtectedRoute><ResourceDetails /></ProtectedRoute>} />
           <Route path="/progress" element={<ProtectedRoute><ProgressDashboard /></ProtectedRoute>} />

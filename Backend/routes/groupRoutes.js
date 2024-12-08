@@ -250,5 +250,33 @@ router.get('/:groupId/discussions/:discussionId/comments', protect, async (req, 
   }
 });
 
+// Get all resources in a group (only if student has joined the group)
+router.get('/:groupId/resources', protect, async (req, res) => {
+  try {
+    // Retrieve the group by ID
+    const group = await Group.findById(req.params.groupId);
+    if (!group) {
+      return res.status(404).json({ message: 'Group not found' });
+    }
+
+    // Find the student from the JWT token
+    const student = await Student.findById(req.student._id);  // Using the student ID from the decoded token
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    // Check if the student has joined the group
+    if (!student.groupId.includes(group._id)) {
+      return res.status(403).json({ message: 'You must join the group before accessing resources' });
+    }
+
+    // Return all the resources of the group
+    res.status(200).json(group.resources);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching resources' });
+  }
+});
+
 
 module.exports = router;

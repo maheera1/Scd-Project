@@ -22,7 +22,7 @@ const loginUser = (userData) => API.post('/auth/login', userData);     // Login 
 const fetchGroups = () => API.get('/groups');
 const fetchGroupDetails = (groupId) => API.get(`/groups/${groupId}`);
 const joinGroup = (groupId) => API.post(`/groups/${groupId}/join`);
-const fetchResources = (groupId) => API.get(`/groups/${groupId}/resources`);
+const fetchResources = () => API.get('/students/resources');
 const fetchDiscussions = (groupId) => API.get(`/groups/${groupId}/discussions`);
 const createDiscussion = (groupId, data) => API.post(`/groups/${groupId}/discussions`, data);
 
