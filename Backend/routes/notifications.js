@@ -5,7 +5,7 @@ const { protect } = require('../middleware/authMiddleware'); // Import the prote
 const router = express.Router();
 
 // Route to fetch all notifications for authenticated student (but notifications are for everyone)
-router.get('/', protect, async (req, res) => {
+router.get('/see', protect, async (req, res) => {
     try {
       // Fetch all notifications (no filtering by studentId)
       const notifications = await Notification.find().sort({ timestamp: -1 });

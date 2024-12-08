@@ -25,6 +25,7 @@ const joinGroup = (groupId) => API.post(`/groups/${groupId}/join`);
 const fetchResources = () => API.get('/students/resources');
 const fetchDiscussions = (groupId) => API.get(`/groups/${groupId}/discussions`);
 const createDiscussion = (groupId, data) => API.post(`/groups/${groupId}/discussions`, data);
+const fetchNotifications = () => API.get('/notification/see');
 
 // Student-related API Calls
 const bookmarkResource = (data) => API.post('/students/bookmark', data); // Bookmark resource
@@ -32,6 +33,7 @@ const bookmarkResource = (data) => API.post('/students/bookmark', data); // Book
 // Export API instance and functions as named exports
 export {
   API,
+  fetchNotifications,
   registerUser,
   loginUser,
   fetchGroups,
