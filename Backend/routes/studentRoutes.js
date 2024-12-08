@@ -386,5 +386,24 @@ router.get('/resources/:resourceId/status', protect, async (req, res) => {
     res.status(500).json({ message: 'Error fetching resource status' });
   }
 });
+router.get('/not-joined', protect, async (req, res) => {
+  try {
+    // Find the student from the JWT token (this comes from the 'protect' middleware)
+    const student = await Student.findById(req.student._id);
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
 
+    // Get all the groups
+    const allGroups = await Group.find();
+
+    // Filter out the groups the student has already joined
+    const notJoinedGroups = allGroups.filter(group => !student.groupId.includes(group._id));
+
+    res.status(200).json(notJoinedGroups);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching groups the student has not joined' });
+  }
+});
 module.exports = router;

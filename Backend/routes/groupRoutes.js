@@ -288,5 +288,7 @@ router.get('/:groupId/resources', protect, async (req, res) => {
   }
 });
 
+// Get all groups the student has not joined
+
 
 module.exports = router;

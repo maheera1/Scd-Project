@@ -22,6 +22,7 @@ const Navbar = () => {
       </div>
       <ul className="navbar-links">
         <li className="navbar-item"><Link to="/dashboard" className="navbar-link">Dashboard</Link></li>
+        <li className="navbar-item"><Link to="/all-groups" className="navbar-link"> All Groups</Link></li>
         <li className="navbar-item"><Link to="/groups" className="navbar-link">Groups</Link></li>
         <li className="navbar-item"><Link to="/notes" className="navbar-link">Notes</Link></li>
         <li className="navbar-item"><Link to="/resources" className="navbar-link">Resources</Link></li>
