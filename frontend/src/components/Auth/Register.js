@@ -1,52 +1,51 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { registerUser } from '../../api'; // Assuming registerUser is a function in your API module
-import './Register.css';  // Import the updated CSS for styling
+import { registerUser } from '../../api'; 
+import './Register.css';  
 
 const Register = () => {
   const [formData, setFormData] = useState({ username: '', password: '', name: '', email: '' });
-  const [message, setMessage] = useState('');  // For feedback messages
-  const [loading, setLoading] = useState(false);  // To handle loading state
-  const [error, setError] = useState('');  // For displaying errors
-  const navigate = useNavigate();  // For navigation
+  const [message, setMessage] = useState('');  
+  const [loading, setLoading] = useState(false);  
+  const [error, setError] = useState('');  
+  const navigate = useNavigate();  
 
-  // Handling input change
+ 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handling form submission
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);  // Set loading to true to disable submit button
+    setLoading(true); 
 
     try {
-      const response = await registerUser(formData);  // Assuming registerUser is your API function
+      const response = await registerUser(formData);  
       setMessage('Registration successful. Redirecting to login...');
-      setError('');  // Reset error message on successful registration
+      setError(''); 
 
-      // Redirect to the login page with a slight delay
+      
       setTimeout(() => {
-        navigate('/login');  // Use navigate to redirect
-      }, 1000); // Slight delay before navigating
-
+        navigate('/login'); 
+      }, 1000);
     } catch (error) {
-      setMessage('');  // Reset success message on error
+      setMessage('');  
       setError(error.response?.data?.message || 'An error occurred during registration.');
     } finally {
-      setLoading(false);  // Reset loading state after request finishes
+      setLoading(false); 
     }
   };
 
   return (
     <div className="register-container">
-      {/* Left side for logo */}
+    
       <div className="register-logo-container">
         <img src="/logo.jpg" alt="Logo" className="register-logo" />
       </div>
 
-      {/* Right side for register form */}
+  
       <div className="register-form-container">
         <h2 className="register-header">Register</h2>
         <form onSubmit={handleSubmit} className="register-form">
@@ -101,7 +100,7 @@ const Register = () => {
         {message && <p className="message-success">{message}</p>}
         {error && <p className="message-error">{error}</p>}
 
-        {/* Link to the login page */}
+        
         <div className="signup-link-container">
           <p>Already have an account? <Link to="/login" className="signup-link">Login</Link></p>
         </div>

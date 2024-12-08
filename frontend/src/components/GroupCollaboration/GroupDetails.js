@@ -36,10 +36,10 @@ const GroupDetails = () => {
   const fetchStudentName = async (studentId) => {
     try {
       const response = await axios.get(`http://localhost:5000/api/students/students/${studentId}`);
-      return response.data?.name || 'Unknown'; // Return 'Unknown' if name is not found
+      return response.data?.name || 'Unknown'; 
     } catch (err) {
       console.error('Failed to fetch student name', err);
-      return 'Unknown'; // Return 'Unknown' if the request fails
+      return 'Unknown'; 
     }
   };
 
@@ -95,9 +95,9 @@ const GroupDetails = () => {
           { headers: { Authorization: `Bearer ${token}` } }
         );
   
-        console.log("Fetched comments: ", response.data); // Log the response data to check
+        console.log("Fetched comments: ", response.data); 
   
-        // Fetch student names for each comment
+        
         const commentsWithNames = await Promise.all(
           response.data.map(async (comment) => {
             const studentName = await fetchStudentName(comment.studentId);
@@ -158,21 +158,21 @@ const GroupDetails = () => {
     }
   
     try {
-      // Perform the API call to bookmark the discussion
+      
       await axios.post(
         'http://localhost:5000/api/students/bookmark-discussion',
         { discussionId, groupId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
   
-      // Add to bookmarked discussions if successful
+      
       setBookmarkedDiscussions((prevState) => new Set(prevState).add(discussionId));
     } catch (err) {
-      // Check if the error response indicates already bookmarked
+      
       if (err.response && err.response.status === 400 && err.response.data.message === 'Discussion is already bookmarked') {
         setError('This discussion is already bookmarked');
       } else {
-        // Handle generic error case
+       
         setError('Failed to bookmark discussion. Please try again.');
       }
     }

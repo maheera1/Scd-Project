@@ -1,22 +1,21 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
-import './Navbar.css'; // Import the CSS file for styling
+import { Link, useNavigate } from 'react-router-dom'; 
+import './Navbar.css'; 
 
 const Navbar = () => {
-  const navigate = useNavigate(); // Hook to programmatically navigate
+  const navigate = useNavigate(); 
 
-  // Function to handle logout
   const handleLogout = () => {
-    // Remove token from localStorage
+
     localStorage.removeItem('token');
-    // Redirect to login page
+    
     navigate('/login');
   };
 
   return (
     <nav className="navbar">
       <div className="navbar-brand-container">
-        {/* Logo from public folder */}
+      
         <img src="/logo.jpg" alt="BrainBox Logo" className="navbar-logo" />
         <h1 className="navbar-brand">BrainBox</h1>
       </div>

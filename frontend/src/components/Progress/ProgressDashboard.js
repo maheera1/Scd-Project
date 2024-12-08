@@ -1,14 +1,14 @@
-// src/components/Progress/ProgressDashboard.js
+
 import React, { useEffect, useState } from 'react';
-import { API } from '../../api'; // Assuming your axios instance is exported here
-import './ProgressDashboard.css'; // Import updated CSS for styling
+import { API } from '../../api'; 
+import './ProgressDashboard.css'; 
 
 const ProgressDashboard = () => {
   const [progressData, setProgressData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch progress data when the component mounts
+
   useEffect(() => {
     const fetchProgress = async () => {
       try {

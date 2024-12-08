@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { API } from '../../api';  // Assuming API is set up with Axios
-import './AllGroups.css'; // Import custom CSS file
+import { API } from '../../api';  
+import './AllGroups.css';
 
 const AllGroups = () => {
   const [groups, setGroups] = useState([]);
@@ -35,7 +35,7 @@ const AllGroups = () => {
       });
 
       alert('Successfully joined the group!');
-      // Optionally, refetch the groups or update state to reflect changes
+      
     } catch (err) {
       alert('Failed to join group');
     }

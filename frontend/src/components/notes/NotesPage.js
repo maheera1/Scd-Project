@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
-import { API } from '../../api';  // Import API functions
+import { API } from '../../api';  
 import './NotesPage.css';
 
 const NotesPage = () => {
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState({ title: '', content: '', tags: '' });
   const [editingNote, setEditingNote] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');  // New state for search input
-  const [searchBy, setSearchBy] = useState('word'); // Whether to search by word or tags
+  const [searchQuery, setSearchQuery] = useState('');  
+  const [searchBy, setSearchBy] = useState('word'); 
   const navigate = useNavigate();
-  const token = localStorage.getItem('token'); // Retrieve the token from localStorage
+  const token = localStorage.getItem('token'); 
 
   useEffect(() => {
     if (!token) {
       console.error("User not authenticated, redirecting to login...");
-      navigate('/login');  // Redirect to login if no token is found
+      navigate('/login');  
       return;
     }
 
@@ -24,7 +24,7 @@ const NotesPage = () => {
       try {
         const response = await API.get('/notes/getNotes', {
           headers: {
-            Authorization: `Bearer ${token}`, // Attach the token to the Authorization header
+            Authorization: `Bearer ${token}`,
           },
         });
         console.log('Fetched notes:', response.data.notes);
@@ -33,7 +33,7 @@ const NotesPage = () => {
         console.error('Error fetching notes:', error);
         if (error.response && error.response.status === 401) {
           console.error("Unauthorized! Please log in.");
-          navigate('/login');  // Redirect to login if the token is invalid
+          navigate('/login');  
         }
       }
     };
@@ -58,7 +58,7 @@ const NotesPage = () => {
     try {
       const response = await API.post('/notes/createNote', newNote, {
         headers: {
-          Authorization: `Bearer ${token}`, // Send the token in the header
+          Authorization: `Bearer ${token}`, 
         },
       });
 
@@ -68,7 +68,7 @@ const NotesPage = () => {
       console.error('Error adding note:', error);
       if (error.response && error.response.status === 401) {
         console.error("Unauthorized! Please log in.");
-        navigate('/login');  // Redirect to login if the token is invalid
+        navigate('/login');  
       }
     }
   };
@@ -82,7 +82,7 @@ const NotesPage = () => {
     try {
       const response = await API.delete(`/notes/deleteNote/${noteId}`, {
         headers: {
-          Authorization: `Bearer ${token}`, // Include token in header
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -144,18 +144,18 @@ const NotesPage = () => {
 
   const handleSearch = async () => {
     if (searchQuery.trim() === '') {
-      // If search query is empty, fetch all notes again
+      
       try {
         const response = await API.get('/notes/getNotes', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        setNotes(response.data.notes); // Reset the notes list to all notes
+        setNotes(response.data.notes); 
       } catch (error) {
         console.error('Error fetching notes:', error);
       }
-      return; // Exit the function if no search query
+      return; 
     }
 
     const endpoint =
@@ -167,13 +167,13 @@ const NotesPage = () => {
       const response = await API.get(endpoint, {
         params: {
           query: searchQuery,
-          tags: searchQuery, // If searching by tags, pass it as tags param
+          tags: searchQuery, 
         },
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      setNotes(response.data.notes); // Update notes based on search results
+      setNotes(response.data.notes); 
     } catch (error) {
       console.error('Error searching notes:', error);
     }
@@ -202,7 +202,7 @@ const NotesPage = () => {
         </select>
       </div>
 
-      {/* New Note Form or Edit Form */}
+      
       <div className="note-form">
         <h3>{editingNote ? 'Edit Note' : 'Add New Note'}</h3>
         <input

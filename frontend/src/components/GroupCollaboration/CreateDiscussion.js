@@ -4,8 +4,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import './CreateDiscussion.css';
 
 const CreateDiscussion = () => {
-  const { groupId } = useParams(); // Get groupId from URL
-  const navigate = useNavigate(); // For redirecting after success
+  const { groupId } = useParams();
+  const navigate = useNavigate(); 
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [error, setError] = useState('');
@@ -14,17 +14,17 @@ const CreateDiscussion = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(''); // Reset error message before making a new request
+    setError(''); 
 
     try {
-      // Check if title and body are provided
+     
       if (!title || !body) {
         setError('Title and body are required');
         setLoading(false);
         return;
       }
 
-      // Make a POST request to create a discussion
+      
       const response = await axios.post(
         `http://localhost:5000/api/groups/${groupId}/discussions`,
         {
@@ -33,12 +33,12 @@ const CreateDiscussion = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`, // Send the token in the headers
+            Authorization: `Bearer ${localStorage.getItem('token')}`, 
           },
         }
       );
 
-      // On success, navigate to the group details page
+      
       if (response.status === 201) {
         navigate(`/groups/${groupId}`);
       }

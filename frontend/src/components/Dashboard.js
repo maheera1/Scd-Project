@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { API } from '../api'; // Assuming API is set up with Axios
-import './Dashboard.css'; // External CSS for styling
+import { API } from '../api'; 
+import './Dashboard.css';
 
 const Dashboard = () => {
   const [studentData, setStudentData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [editing, setEditing] = useState(false); // To toggle edit mode
+  const [editing, setEditing] = useState(false); 
   const [formData, setFormData] = useState({
     name: '',
     email: ''
   });
-  const [successMessage, setSuccessMessage] = useState(''); // State to store success message
+  const [successMessage, setSuccessMessage] = useState(''); 
 
-  // Fetch dashboard data from the server
+  
   const fetchDashboardData = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -58,7 +58,7 @@ const Dashboard = () => {
     }));
   };
 
-  // Function to handle profile update
+  
   const handleProfileUpdate = async (e) => {
     e.preventDefault();
     try {
@@ -78,13 +78,12 @@ const Dashboard = () => {
         }
       );
 
-      // Refetch the updated student data after successful profile update
+      
       fetchDashboardData();
 
-      setEditing(false); // Exit edit mode
-      setSuccessMessage('Profile updated successfully!'); // Show success message
+      setEditing(false); 
+      setSuccessMessage('Profile updated successfully!'); 
 
-      // Hide success message after 5 seconds
       setTimeout(() => setSuccessMessage(''), 5000);
     } catch (err) {
       setError(err.response?.data?.message || 'Failed to update profile');
@@ -94,9 +93,9 @@ const Dashboard = () => {
   if (loading) return <p className="loading">Loading dashboard...</p>;
   if (error) return <p className="error">Error: {error}</p>;
 
-  const { name, email, groupId } = studentData || {}; // Destructure data
+  const { name, email, groupId } = studentData || {}; 
 
-  // Filter out duplicate groups
+  
   const uniqueGroups = Array.from(
     new Map(groupId?.map(group => [group._id, group])).values()
   );

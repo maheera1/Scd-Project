@@ -4,7 +4,6 @@ import Navbar from './components/Navbar';
 import GroupList from './components/GroupCollaboration/GroupList';
 import GroupDetails from './components/GroupCollaboration/GroupDetails';
 import ResourceList from './components/Resources/ResourceList';
-import ResourceDetails from './components/Resources/ResourceDetails';
 import ProgressDashboard from './components/Progress/ProgressDashboard';
 import NotificationsList from './components/Notifications/NotificationsList';
 import Dashboard from './components/Dashboard';
@@ -37,7 +36,6 @@ const App = () => {
           <Route path="/notes" element={<ProtectedRoute><NotesPage /></ProtectedRoute>} />
           <Route path="/resources" element={<ProtectedRoute><ResourceList /></ProtectedRoute>} /> {/* Add ResourceList Route */}
           <Route path="/groups/:groupId/create-discussion" element={<CreateDiscussion />} />
-          <Route path="/resources/:id" element={<ProtectedRoute><ResourceDetails /></ProtectedRoute>} />
           <Route path="/progress" element={<ProtectedRoute><ProgressDashboard /></ProtectedRoute>} />
           <Route path="/notifications" element={<ProtectedRoute><NotificationsList /></ProtectedRoute>} />
           <Route path="/bookmarks" element={<ProtectedRoute><Bookmarks /></ProtectedRoute>} />

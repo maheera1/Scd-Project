@@ -41,8 +41,8 @@ const Groups = () => {
   }, []);
 
   const handleGroupClick = (groupId) => {
-    console.log("Navigating to Group with ID:", groupId); // Log to debug
-    navigate(`/groups/${groupId}`); // Updated route to /groups/:groupId
+    console.log("Navigating to Group with ID:", groupId); 
+    navigate(`/groups/${groupId}`);
   };
 
   if (loading) return <p className="groups-loading-message">Loading groups...</p>;
@@ -57,7 +57,7 @@ const Groups = () => {
             <li
               key={group._id}
               className="group-item"
-              onClick={() => handleGroupClick(group._id)} // Pass group._id
+              onClick={() => handleGroupClick(group._id)} 
             >
               <h2>{group.name}</h2>
               <p>{group.description || 'No description available'}</p>

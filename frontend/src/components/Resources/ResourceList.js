@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchResources } from '../../api'; // Import the fetchResources function
+import { fetchResources } from '../../api'; 
 import './ResourceList.css';
 
 const ResourceList = () => {
@@ -14,12 +14,12 @@ const ResourceList = () => {
         const response = await fetchResources();
         const updatedResources = await Promise.all(
           response.data.map(async (resource) => {
-            const status = await fetchResourceStatus(resource.resourceId); // Fetch resource status
+            const status = await fetchResourceStatus(resource.resourceId);
             return { ...resource, ...status };
           })
         );
 
-        // Separate resources into "not done" and "done" categories
+        
         const notDone = updatedResources.filter((res) => res.studentDoneStatus === 'not done');
         const done = updatedResources.filter((res) => res.studentDoneStatus === 'done');
         setNotDoneResources(notDone);

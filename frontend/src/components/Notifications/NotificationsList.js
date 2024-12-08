@@ -1,7 +1,7 @@
-// components/Notifications/NotificationsList.js
+
 import React, { useEffect, useState } from 'react';
-import { fetchNotifications } from '../../api'; // Import the fetchNotifications function
-import './NotificationsList.css'; // Import the CSS file
+import { fetchNotifications } from '../../api'; 
+import './NotificationsList.css'; 
 
 const NotificationsList = () => {
   const [notifications, setNotifications] = useState([]);
@@ -12,7 +12,7 @@ const NotificationsList = () => {
     const getNotifications = async () => {
       try {
         const response = await fetchNotifications();
-        setNotifications(response.data); // Set the notifications state
+        setNotifications(response.data); 
       } catch (err) {
         setError('Failed to fetch notifications');
         console.error(err);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchGroups } from '../../api';
-import './GroupList.css'; // External CSS file for styling
+import './GroupList.css'; 
 
 const GroupList = () => {
   const [groups, setGroups] = useState([]);

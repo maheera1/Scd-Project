@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { fetchBookmarks } from '../../api'; // Import the fetchBookmarks function
+import { fetchBookmarks } from '../../api'; 
 import axios from 'axios';
-import './Bookmarks.css'; // Ensure you have a CSS file for styling
+import './Bookmarks.css'; 
 
 const Bookmarks = () => {
   const [bookmarks, setBookmarks] = useState([]);
@@ -12,7 +12,7 @@ const Bookmarks = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = localStorage.getItem('token'); // Get token from local storage
+        const token = localStorage.getItem('token'); 
         
         if (!token) {
           setError('You must be logged in to view bookmarks');
@@ -24,10 +24,10 @@ const Bookmarks = () => {
         const response = await fetchBookmarks(); 
         setBookmarks(response.data.bookmarks); 
 
-        // Fetching Bookmarked Discussions with the Authorization header
+       
         const discussionResponse = await axios.get(
           'http://localhost:5000/api/students/bookmarked-discussions',
-          { headers: { Authorization: `Bearer ${token}` } } // Sending token as a Bearer token
+          { headers: { Authorization: `Bearer ${token}` } }
         );
         setBookmarkedDiscussions(discussionResponse.data.bookmarkedDiscussions); 
         setLoading(false);
@@ -47,7 +47,7 @@ const Bookmarks = () => {
     <div className="bookmarks-container">
       <h2>Your Bookmarks</h2>
 
-      {/* Displaying Bookmarked Resources */}
+      
       <h3>Bookmarked Resources</h3>
       {bookmarks.length === 0 ? (
         <p>You have no bookmarked resources yet.</p>
@@ -67,7 +67,7 @@ const Bookmarks = () => {
         </ul>
       )}
 
-      {/* Displaying Bookmarked Discussions */}
+      
       <h3>Bookmarked Discussions</h3>
       {bookmarkedDiscussions.length === 0 ? (
         <p>You have no bookmarked discussions yet.</p>
