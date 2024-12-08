@@ -119,8 +119,6 @@ const ResourceList = () => {
       setNotDoneResources((prev) => prev.filter((resource) => resource.resourceId !== resourceId));
       const resource = notDoneResources.find((res) => res.resourceId === resourceId);
       setDoneResources((prev) => [...prev, { ...resource, studentDoneStatus: 'done' }]);
-
-      // alert('Resource marked as done!');
     } catch (err) {
       console.error('Error marking resource as done:', err);
       alert('An error occurred while marking the resource as done.');
@@ -151,11 +149,38 @@ const ResourceList = () => {
       setDoneResources((prev) => prev.filter((resource) => resource.resourceId !== resourceId));
       const resource = doneResources.find((res) => res.resourceId === resourceId);
       setNotDoneResources((prev) => [...prev, { ...resource, studentDoneStatus: 'not done' }]);
-
-      // alert('Resource marked as not done!');
     } catch (err) {
       console.error('Error marking resource as not done:', err);
       alert('An error occurred while marking the resource as not done.');
+    }
+  };
+
+  const handleBookmark = async (resourceId, groupId) => {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      alert('You are not logged in.');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/api/students/bookmark', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ resourceId, groupId }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to bookmark resource');
+      }
+
+      alert('Resource bookmarked successfully!');
+    } catch (err) {
+      console.error('Bookmark error:', err);
+      alert('An error occurred while bookmarking the resource.');
     }
   };
 
@@ -196,6 +221,12 @@ const ResourceList = () => {
                 >
                   Mark as Done
                 </button>
+                <button
+                  className="bookmark-button"
+                  onClick={() => handleBookmark(resource.resourceId, resource.groupId)}
+                >
+                  Bookmark
+                </button>
               </div>
             </li>
           ))}
@@ -227,6 +258,12 @@ const ResourceList = () => {
                   onClick={() => handleMarkAsNotDone(resource.resourceId)}
                 >
                   Mark as Not Done
+                </button>
+                <button
+                  className="bookmark-button"
+                  onClick={() => handleBookmark(resource.resourceId, resource.groupId)}
+                >
+                  Bookmark
                 </button>
               </div>
             </li>

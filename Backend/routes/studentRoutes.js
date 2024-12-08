@@ -4,6 +4,8 @@ const Student = require('../models/Student');
 const Group = require('../models/Group');
 const router = express.Router();
 
+
+
 // Protected route
 router.get('/dashboard', protect, async (req, res) => {
   try {
@@ -23,12 +25,10 @@ router.get('/dashboard', protect, async (req, res) => {
     res.status(500).json({ message: 'Error fetching dashboard data' });
   }
 });
-
-
 // Add a resource to bookmarks
 router.post('/bookmark', protect, async (req, res) => {
   try {
-    const { resourceId, groupId } = req.body;  // Get resourceId and groupId from the request body
+    const { resourceId, groupId } = req.body; // Get resourceId and groupId from the request body
 
     if (!resourceId || !groupId) {
       return res.status(400).json({ message: 'Resource ID and Group ID are required' });
@@ -53,6 +53,15 @@ router.post('/bookmark', protect, async (req, res) => {
       return res.status(404).json({ message: 'Resource not found in this group' });
     }
 
+    // Check if the resource is already bookmarked
+    const alreadyBookmarked = student.bookmarks.some(
+      (bookmark) => bookmark.groupId.toString() === groupId.toString() && bookmark.resourceIndex === resourceIndex
+    );
+
+    if (alreadyBookmarked) {
+      return res.status(400).json({ message: 'Resource is already bookmarked' });
+    }
+
     // Add the resource to the student's bookmarks
     student.bookmarks.push({ groupId: group._id, resourceIndex });
     await student.save();
@@ -64,27 +73,60 @@ router.post('/bookmark', protect, async (req, res) => {
   }
 });
 
-// Get all bookmarks for a student
-router.get('/:studentId/bookmarks', async (req, res) => {
-  const { studentId } = req.params;
 
+router.get('/bookmarks', protect, async (req, res) => {
   try {
-    const student = await Student.findById(studentId).populate('bookmarks.groupId', 'name'); // Populate group name
+    // Find the student using the ID from the JWT token
+    const student = await Student.findById(req.student._id).populate({
+      path: 'bookmarks.groupId', // Populate the groupId in bookmarks
+      select: 'name description resources', // Fetch the group name, description, and resources
+    });
+
     if (!student) {
       return res.status(404).json({ message: 'Student not found' });
     }
 
-    const bookmarks = student.bookmarks.map(bookmark => {
-      const group = bookmark.groupId;
-      const resource = group ? group.resources[bookmark.resourceIndex] : null;
-      return resource ? { groupName: group.name, ...resource } : null;
-    }).filter(Boolean); // Filter out invalid references
+    // Use a Set to track unique resources
+    const uniqueBookmarks = new Set();
 
-    res.status(200).json({ bookmarks });
-  } catch (err) {
-    res.status(500).json({ message: 'Server error', error: err.message });
+    // Format the bookmarks to include detailed resource information
+    const formattedBookmarks = student.bookmarks
+      .map(bookmark => {
+        const group = bookmark.groupId;
+        if (!group) return null;
+
+        const resource = group.resources[bookmark.resourceIndex];
+        if (!resource) return null;
+
+        // Create a unique identifier for the bookmark (groupId + resourceId)
+        const uniqueKey = `${group._id}-${resource.resourceId}`;
+        if (uniqueBookmarks.has(uniqueKey)) {
+          return null; // Skip duplicates
+        }
+
+        uniqueBookmarks.add(uniqueKey); // Add uniqueKey to the Set
+
+        return {
+          groupId: group._id,
+          groupName: group.name,
+          resource: {
+            resourceId: resource.resourceId,
+            type: resource.type,
+            url: resource.url,
+            filePath: resource.filePath,
+            description: resource.description,
+          },
+        };
+      })
+      .filter(bookmark => bookmark !== null); // Filter out null entries
+
+    res.status(200).json({ bookmarks: formattedBookmarks });
+  } catch (error) {
+    console.error('Error fetching bookmarks:', error);
+    res.status(500).json({ message: 'Error fetching bookmarks' });
   }
 });
+
 
 // Route to get joined groups
 router.get('/joined', protect, async (req, res) => {
@@ -107,7 +149,7 @@ router.get('/joined', protect, async (req, res) => {
   }
 });
 // Route to get student details by studentId
-// Route to get student details by studentId
+
 router.get('/students/:studentId', async (req, res) => {
   const { studentId } = req.params; // Get the studentId from the URL
 

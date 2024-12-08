@@ -12,6 +12,7 @@ import Register from './components/Auth/Register';
 import Login from './components/Auth/Login';
 import Groups from './components/GroupCollaboration/groups';
 import CreateDiscussion from './components/GroupCollaboration/CreateDiscussion';
+import Bookmarks from './components/Bookmarks/Bookmarks';
 import NotesPage from './components/notes/NotesPage';
 import './App.css';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -37,6 +38,7 @@ const App = () => {
           <Route path="/resources/:id" element={<ProtectedRoute><ResourceDetails /></ProtectedRoute>} />
           <Route path="/progress" element={<ProtectedRoute><ProgressDashboard /></ProtectedRoute>} />
           <Route path="/notifications" element={<ProtectedRoute><NotificationsList /></ProtectedRoute>} />
+          <Route path="/bookmarks" element={<ProtectedRoute><Bookmarks /></ProtectedRoute>} />
 
           <Route path="/" element={<Navigate to={token ? "/dashboard" : "/login"} />} />
         </Routes>

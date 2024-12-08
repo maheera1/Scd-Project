@@ -26,13 +26,15 @@ const fetchResources = () => API.get('/students/resources');
 const fetchDiscussions = (groupId) => API.get(`/groups/${groupId}/discussions`);
 const createDiscussion = (groupId, data) => API.post(`/groups/${groupId}/discussions`, data);
 const fetchNotifications = () => API.get('/notification/see');
+const fetchBookmarks = () => API.get('students/bookmarks');
 
 // Student-related API Calls
-const bookmarkResource = (data) => API.post('/students/bookmark', data); // Bookmark resource
+const bookmarkResource = (data) => API.post('/students/bookmarks', data); // Bookmark resource
 
 // Export API instance and functions as named exports
 export {
   API,
+  fetchBookmarks,
   fetchNotifications,
   registerUser,
   loginUser,
