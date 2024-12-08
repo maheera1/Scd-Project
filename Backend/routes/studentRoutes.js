@@ -106,6 +106,35 @@ router.get('/joined', protect, async (req, res) => {
     res.status(500).json({ message: 'Error fetching joined groups', error: error.message });
   }
 });
+// Route to get student details by studentId
+// Route to get student details by studentId
+router.get('/students/:studentId', async (req, res) => {
+  const { studentId } = req.params; // Get the studentId from the URL
+
+  try {
+    // Find the student by the provided studentId
+    const student = await Student.findById(studentId).populate('groupId', 'name description'); // Populate groupId to get group details
+
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    // Remove duplicates from the groupId array by filtering based on _id
+    const uniqueGroups = [
+      ...new Map(student.groupId.map(group => [group._id.toString(), group])).values(),
+    ];
+
+    // Modify the student object to use the unique groups
+    student.groupId = uniqueGroups;
+
+    // Send the student details as the response
+    res.status(200).json(student);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+});
+
 
 
 module.exports = router;

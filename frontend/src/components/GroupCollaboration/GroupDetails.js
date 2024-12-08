@@ -15,6 +15,7 @@ const GroupDetails = () => {
   const [commentText, setCommentText] = useState({});
   const [comments, setComments] = useState({});
   const [showComments, setShowComments] = useState({});
+  const [students, setStudents] = useState({});
   const [addError, setAddError] = useState('');
 
   useEffect(() => {
@@ -30,6 +31,17 @@ const GroupDetails = () => {
     };
     fetchGroupDetails();
   }, [groupId]);
+
+  const fetchStudentName = async (studentId) => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/students/students/${studentId}`);
+      return response.data?.name || 'Unknown'; // Return 'Unknown' if name is not found
+    } catch (err) {
+      console.error('Failed to fetch student name', err);
+      return 'Unknown'; // Return 'Unknown' if the request fails
+    }
+  };
+  
 
   const handleDiscussionSubmit = async (e) => {
     e.preventDefault();
@@ -69,25 +81,32 @@ const GroupDetails = () => {
 
   const handleShowComments = async (discussionId) => {
     try {
-      // Fetch comments if they are not already loaded
       if (!showComments[discussionId]) {
         setShowComments((prevState) => ({ ...prevState, [discussionId]: true }));
-
+  
         const token = localStorage.getItem('token');
         if (!token) {
           setError('You must be logged in to view comments');
           return;
         }
-
+  
         const response = await axios.get(
           `http://localhost:5000/api/groups/${groupId}/discussions/${discussionId}/comments`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
-
-        setComments((prevState) => ({ ...prevState, [discussionId]: response.data }));
-        console.log('Comments for discussionId:', discussionId, response.data);
+  
+        console.log("Fetched comments: ", response.data); // Log the response data to check
+  
+        // Fetch student names for each comment
+        const commentsWithNames = await Promise.all(
+          response.data.map(async (comment) => {
+            const studentName = await fetchStudentName(comment.studentId);
+            return { ...comment, studentName };
+          })
+        );
+  
+        setComments((prevState) => ({ ...prevState, [discussionId]: commentsWithNames }));
       } else {
-        // Toggle visibility if already loaded
         setShowComments((prevState) => ({
           ...prevState,
           [discussionId]: !prevState[discussionId],
@@ -98,7 +117,7 @@ const GroupDetails = () => {
       setError('Failed to load comments');
     }
   };
-
+  
   const handleCommentTextChange = (discussionId, text) => {
     setCommentText((prevState) => ({ ...prevState, [discussionId]: text }));
   };
@@ -117,9 +136,12 @@ const GroupDetails = () => {
         }
       );
 
+      const studentName = await fetchStudentName(response.data.studentId);
+      const newComment = { ...response.data, studentName };
+
       setComments((prevState) => ({
         ...prevState,
-        [discussionId]: [...(prevState[discussionId] || []), response.data],
+        [discussionId]: [...(prevState[discussionId] || []), newComment],
       }));
       setCommentText((prevState) => ({ ...prevState, [discussionId]: '' }));
     } catch (err) {
@@ -135,34 +157,33 @@ const GroupDetails = () => {
       <h2>{group.name}</h2>
       <p>{group.description || 'No description available'}</p>
 
-    {/* Adding a New Discussion */}
-<h3>Create a New Discussion</h3>
-<form onSubmit={handleDiscussionSubmit} className="create-discussion-form">
-  <div>
-    <label htmlFor="discussionTitle">Title:</label>
-    <input
-      type="text"
-      id="discussionTitle"
-      value={discussionTitle}
-      onChange={(e) => setDiscussionTitle(e.target.value)}
-      required
-    />
-  </div>
-  <div>
-    <label htmlFor="discussionBody">Body:</label>
-    <textarea
-      id="discussionBody"
-      value={discussionBody}
-      onChange={(e) => setDiscussionBody(e.target.value)}
-      required
-    />
-  </div>
-  <button type="submit" disabled={isAddingDiscussion}>
-    {isAddingDiscussion ? 'Creating Discussion...' : 'Create Discussion'}
-  </button>
-</form>
-{addDiscussionError && <p className="error-message">{addDiscussionError}</p>}
-
+      {/* Adding a New Discussion */}
+      <h3>Create a New Discussion</h3>
+      <form onSubmit={handleDiscussionSubmit} className="create-discussion-form">
+        <div>
+          <label htmlFor="discussionTitle">Title:</label>
+          <input
+            type="text"
+            id="discussionTitle"
+            value={discussionTitle}
+            onChange={(e) => setDiscussionTitle(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="discussionBody">Body:</label>
+          <textarea
+            id="discussionBody"
+            value={discussionBody}
+            onChange={(e) => setDiscussionBody(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit" disabled={isAddingDiscussion}>
+          {isAddingDiscussion ? 'Creating Discussion...' : 'Create Discussion'}
+        </button>
+      </form>
+      {addDiscussionError && <p className="error-message">{addDiscussionError}</p>}
 
       {/* Displaying Discussions and Comments */}
       <h3>Discussions:</h3>
@@ -193,7 +214,7 @@ const GroupDetails = () => {
                   comments[discussion._id].map((comment) => (
                     <div key={comment._id} className="comment-item">
                       <p>{comment.comment}</p>
-                      <small>By Student ID: {comment.studentId}</small>
+                      <small> {comment.studentName}</small>
                     </div>
                   ))
                 ) : (
@@ -201,8 +222,6 @@ const GroupDetails = () => {
                 )}
               </div>
             )}
-
-
           </li>
         ))}
       </ul>

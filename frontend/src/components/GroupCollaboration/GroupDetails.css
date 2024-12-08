@@ -9,7 +9,11 @@
     font-family: 'Arial', sans-serif;
     animation: fadeIn 0.6s ease-out;
 }
-
+.group-details-container ul {
+    list-style-type: none;
+    padding-left: 0; /* Ensure there's no additional padding */
+  }
+  
 /* Animation */
 @keyframes fadeIn {
     0% { opacity: 0; }
