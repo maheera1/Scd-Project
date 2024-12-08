@@ -17,6 +17,7 @@ const GroupDetails = () => {
   const [showComments, setShowComments] = useState({});
   const [students, setStudents] = useState({});
   const [addError, setAddError] = useState('');
+  const [bookmarkedDiscussions, setBookmarkedDiscussions] = useState(new Set());
 
   useEffect(() => {
     const fetchGroupDetails = async () => {
@@ -41,7 +42,6 @@ const GroupDetails = () => {
       return 'Unknown'; // Return 'Unknown' if the request fails
     }
   };
-  
 
   const handleDiscussionSubmit = async (e) => {
     e.preventDefault();
@@ -149,6 +149,37 @@ const GroupDetails = () => {
     }
   };
 
+  // Function to bookmark a discussion
+  const handleBookmark = async (discussionId) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setError('You must be logged in to bookmark a discussion');
+      return;
+    }
+  
+    try {
+      // Perform the API call to bookmark the discussion
+      await axios.post(
+        'http://localhost:5000/api/students/bookmark-discussion',
+        { discussionId, groupId },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+  
+      // Add to bookmarked discussions if successful
+      setBookmarkedDiscussions((prevState) => new Set(prevState).add(discussionId));
+    } catch (err) {
+      // Check if the error response indicates already bookmarked
+      if (err.response && err.response.status === 400 && err.response.data.message === 'Discussion is already bookmarked') {
+        setError('This discussion is already bookmarked');
+      } else {
+        // Handle generic error case
+        setError('Failed to bookmark discussion. Please try again.');
+      }
+    }
+  };
+  
+  
+
   if (loading) return <p>Loading group details...</p>;
   if (error) return <p>{error}</p>;
 
@@ -192,6 +223,14 @@ const GroupDetails = () => {
           <li key={discussion._id} className="discussion-item">
             <h4>{discussion.title}</h4>
             <p>{discussion.body}</p>
+
+            {/* Bookmark Button */}
+            <button
+              onClick={() => handleBookmark(discussion._id)}
+              disabled={bookmarkedDiscussions.has(discussion._id)}
+            >
+              {bookmarkedDiscussions.has(discussion._id) ? 'Bookmarked' : 'Bookmark'}
+            </button>
 
             {/* Add Comment Input */}
             <div className="add-comment">

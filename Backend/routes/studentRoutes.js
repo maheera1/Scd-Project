@@ -406,4 +406,113 @@ router.get('/not-joined', protect, async (req, res) => {
     res.status(500).json({ message: 'Error fetching groups the student has not joined' });
   }
 });
+// Add a discussion to bookmarks
+router.post('/bookmark-discussion', protect, async (req, res) => {
+  try {
+    const { discussionId, groupId } = req.body; // Get discussionId and groupId from request body
+
+    if (!discussionId || !groupId) {
+      return res.status(400).json({ message: 'Discussion ID and Group ID are required' });
+    }
+
+    // Find the student based on the student ID (from the token)
+    const student = await Student.findById(req.student._id);
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    // Find the group by groupId
+    const group = await Group.findById(groupId);
+    if (!group) {
+      return res.status(404).json({ message: 'Group not found' });
+    }
+
+    // Find the discussion within the group by discussionId
+    const discussion = group.discussions.find(d => d._id.toString() === discussionId.toString());
+    if (!discussion) {
+      return res.status(404).json({ message: 'Discussion not found in this group' });
+    }
+
+    // Check if the discussion is already bookmarked
+    const alreadyBookmarked = student.bookmarks.some(
+      (bookmark) => bookmark.groupId.toString() === groupId.toString() && bookmark.discussionId.toString() === discussionId.toString()
+    );
+
+    if (alreadyBookmarked) {
+      return res.status(400).json({ message: 'Discussion is already bookmarked' });
+    }
+
+    // Add the discussion to the student's bookmarks
+    student.bookmarks.push({ groupId, discussionId });
+    await student.save();
+
+    res.status(200).json({ message: 'Discussion bookmarked successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Something went wrong' });
+  }
+});
+// Get bookmarked discussions
+router.get('/bookmarked-discussions', protect, async (req, res) => {
+  try {
+    // Find the student and populate bookmarks with groupId and discussions
+    const student = await Student.findById(req.student._id)
+      .populate({
+        path: 'bookmarks.groupId', // Populate the groupId (Group details)
+        select: 'name description discussions', // Select the fields you need from the Group
+        populate: {
+          path: 'discussions', // Populate the embedded discussions within the Group
+          select: 'title body createdBy', // Select the fields you need from the discussion
+        },
+      });
+
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    // Log to inspect the structure of bookmarks and groups
+    console.log("Student Bookmarks:", student.bookmarks);
+
+    // Format the bookmarked discussions
+    const bookmarkedDiscussions = student.bookmarks.map(bookmark => {
+      const group = bookmark.groupId;
+
+      // Check if groupId and discussions exist
+      if (!group || !group.discussions || group.discussions.length === 0) {
+        console.log(`No discussions found for group: ${group._id}`);
+        return null; // Skip if no discussions exist in the group
+      }
+
+      // Check if the bookmark has a valid discussionId
+      if (!bookmark.discussionId) {
+        console.log("No discussionId found in bookmark, skipping...");
+        return null; // Skip if no discussionId in the bookmark
+      }
+
+      // Find the corresponding discussion
+      const discussion = group.discussions.find(disc => disc._id.toString() === bookmark.discussionId.toString());
+
+      if (!discussion) {
+        console.log(`No matching discussion found for discussionId: ${bookmark.discussionId}`);
+        return null; // Skip if no matching discussion found
+      }
+
+      return {
+        groupId: group._id,
+        groupName: group.name,
+        discussionId: discussion._id,
+        discussionTitle: discussion.title,
+        discussionBody: discussion.body,
+        discussionCreatedBy: discussion.createdBy,
+      };
+    }).filter(disc => disc !== null); // Remove any null values (when there was no match)
+
+    // Send the response
+    res.status(200).json({ bookmarkedDiscussions });
+  } catch (error) {
+    console.error('Error fetching bookmarked discussions:', error);
+    res.status(500).json({ message: 'Error fetching bookmarked discussions' });
+  }
+});
+
 module.exports = router;

@@ -124,5 +124,64 @@ router.get('/getNotes', protect, async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
+// Search notes based on tags
+router.get('/searchNotes', protect, async (req, res) => {
+    const studentId = req.student._id;  // Get student ID from the token
+    const { tags } = req.query;  // Tags will be passed as a query parameter (comma separated)
+  
+    if (!tags) {
+      return res.status(400).json({ message: 'Tags parameter is required' });
+    }
+  
+    const tagArray = tags.split(',').map(tag => tag.trim().toLowerCase()); // Convert tags to an array and normalize
+  
+    try {
+      // Find the student by ID
+      const student = await Student.findById(studentId);
+      if (!student) {
+        return res.status(404).json({ message: 'Student not found' });
+      }
+  
+      // Filter notes that contain any of the tags (case-insensitive)
+      const filteredNotes = student.notes.filter(note =>
+        note.tags.some(tag => tagArray.includes(tag.toLowerCase()))
+      );
+  
+      res.status(200).json({ notes: filteredNotes });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+  // Search notes based on query word in title or content
+router.get('/searchNotesByWord', protect, async (req, res) => {
+    const studentId = req.student._id;  // Get student ID from the token
+    const { query } = req.query;  // The word to search in title or content
+
+    if (!query) {
+        return res.status(400).json({ message: 'Query word is required' });
+    }
+
+    const searchQuery = query.trim().toLowerCase();  // Normalize the query for case-insensitive search
+
+    try {
+        // Find the student by ID
+        const student = await Student.findById(studentId);
+        if (!student) {
+            return res.status(404).json({ message: 'Student not found' });
+        }
+
+        // Filter notes that contain the query word in the title or content
+        const filteredNotes = student.notes.filter(note =>
+            note.title.toLowerCase().includes(searchQuery) ||
+            note.content.toLowerCase().includes(searchQuery)
+        );
+
+        res.status(200).json({ notes: filteredNotes });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 
 module.exports = router;

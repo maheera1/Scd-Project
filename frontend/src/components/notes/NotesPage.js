@@ -4,13 +4,13 @@ import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { API } from '../../api';  // Import API functions
 import './NotesPage.css';
 
-
 const NotesPage = () => {
   const [notes, setNotes] = useState([]);
   const [newNote, setNewNote] = useState({ title: '', content: '', tags: '' });
-  const [editingNote, setEditingNote] = useState(null); // State to track the note being edited
+  const [editingNote, setEditingNote] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');  // New state for search input
+  const [searchBy, setSearchBy] = useState('word'); // Whether to search by word or tags
   const navigate = useNavigate();
-
   const token = localStorage.getItem('token'); // Retrieve the token from localStorage
 
   useEffect(() => {
@@ -50,9 +50,6 @@ const NotesPage = () => {
   };
 
   const handleAddNote = async () => {
-    console.log('Add Note Button Clicked');
-    console.log('New Note Data:', newNote);
-
     if (!newNote.title || !newNote.content || !newNote.tags) {
       console.error('All fields must be filled');
       return;
@@ -65,7 +62,6 @@ const NotesPage = () => {
         },
       });
 
-      console.log('Added note:', response.data.note);
       setNotes((prevNotes) => [...prevNotes, response.data.note]);
       setNewNote({ title: '', content: '', tags: '' });
     } catch (error) {
@@ -78,8 +74,6 @@ const NotesPage = () => {
   };
 
   const handleDeleteNote = async (noteId) => {
-    console.log('Deleting note with ID:', noteId);
-
     if (!noteId) {
       console.error('Note ID is undefined or invalid');
       return;
@@ -101,13 +95,13 @@ const NotesPage = () => {
       console.error('Error deleting note:', error);
       if (error.response && error.response.status === 401) {
         console.error("Unauthorized! Please log in.");
-        navigate('/login');  // Redirect to login if the token is invalid
+        navigate('/login');
       }
     }
   };
 
   const handleEditNote = (note) => {
-    setEditingNote(note); // Set the note to be edited
+    setEditingNote(note);
     setNewNote({
       title: note.title,
       content: note.content,
@@ -128,13 +122,12 @@ const NotesPage = () => {
         },
       });
 
-      console.log('Updated note:', response.data.note);
       setNotes((prevNotes) =>
         prevNotes.map((note) =>
           note._id === editingNote._id ? response.data.note : note
         )
       );
-      setEditingNote(null); // Clear editing state
+      setEditingNote(null);
       setNewNote({ title: '', content: '', tags: '' });
     } catch (error) {
       console.error('Error updating note:', error);
@@ -145,12 +138,72 @@ const NotesPage = () => {
     }
   };
 
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearch = async () => {
+    if (searchQuery.trim() === '') {
+      // If search query is empty, fetch all notes again
+      try {
+        const response = await API.get('/notes/getNotes', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setNotes(response.data.notes); // Reset the notes list to all notes
+      } catch (error) {
+        console.error('Error fetching notes:', error);
+      }
+      return; // Exit the function if no search query
+    }
+
+    const endpoint =
+      searchBy === 'word'
+        ? '/notes/searchNotesByWord'
+        : '/notes/searchNotes';
+
+    try {
+      const response = await API.get(endpoint, {
+        params: {
+          query: searchQuery,
+          tags: searchQuery, // If searching by tags, pass it as tags param
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setNotes(response.data.notes); // Update notes based on search results
+    } catch (error) {
+      console.error('Error searching notes:', error);
+    }
+  };
+
   return (
     <div className="notes-page">
       <h2>Your Notes</h2>
-  
+
+      {/* Search bar */}
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search notes..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
+        <button onClick={handleSearch}>Search</button>
+        <select
+          onChange={(e) => setSearchBy(e.target.value)}
+          value={searchBy}
+          className="search-dropdown"
+        >
+          <option value="word">Search by word</option>
+          <option value="tags">Search by tags</option>
+        </select>
+      </div>
+
       {/* New Note Form or Edit Form */}
-      <div>
+      <div className="note-form">
         <h3>{editingNote ? 'Edit Note' : 'Add New Note'}</h3>
         <input
           type="text"
@@ -176,15 +229,15 @@ const NotesPage = () => {
           {editingNote ? 'Save Changes' : 'Add Note'}
         </button>
       </div>
-  
+
       {/* Notes List */}
-      <div>
+      <div className="notes-list">
         <h3>Your Notes</h3>
         {notes.length === 0 ? (
           <p>No notes available</p>
         ) : (
           notes.map((note) => (
-            <div key={note._id}>
+            <div key={note._id} className="note-card">
               <h4>{note.title}</h4>
               <p>{note.content}</p>
               <small>{note.tags}</small>

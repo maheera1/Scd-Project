@@ -10,7 +10,11 @@ const studentSchema = new mongoose.Schema({
   bookmarks: [
     {
       groupId: { type: mongoose.Schema.Types.ObjectId, ref: 'Group', required: true },
-      resourceIndex: { type: Number, required: true }, // Index of the resource in the group's resources array
+      resourceIndex: { type: Number, required: false }, // Index of the resource in the group's resources array
+      discussionId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Discussion',
+      },
     }
   ],
   notes: [

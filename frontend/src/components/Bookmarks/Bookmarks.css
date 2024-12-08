@@ -100,6 +100,79 @@
     font-weight: bold;
     margin: 20px 0;
 }
+/* Bookmarked Discussions List */
+.bookmarked-discussions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Bookmarked Discussion Item */
+.bookmarked-discussion-item {
+    background: linear-gradient(135deg, #bae4f8, #ffe6fa); /* Light Blue to Light Pink */
+    margin-bottom: 15px;
+    padding: 20px;
+    border: 2px solid #e6eaf0; /* Light Border */
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.bookmarked-discussion-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Highlight Effect for Bookmarked Discussion */
+.bookmarked-discussion-item:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 10px;
+    background: #3174b5; /* Primary Blue */
+    border-radius: 5px 0 0 5px;
+}
+
+/* Discussion Title */
+.bookmarked-discussion-item h4 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Discussion Body */
+.bookmarked-discussion-item p {
+    font-size: 1rem;
+    color: #666; /* Dark Gray */
+    margin: 0 0 10px;
+    line-height: 1.6;
+}
+
+/* Group Name for Discussion */
+.bookmarked-discussion-item small {
+    font-size: 0.9rem;
+    color: #999; /* Lighter Gray */
+}
+
+/* Mobile Responsive for Bookmarked Discussions */
+@media (max-width: 600px) {
+    .bookmarked-discussion-item {
+        padding: 15px;
+    }
+
+    .bookmarked-discussion-item h4 {
+        font-size: 1.2rem;
+    }
+
+    .bookmarked-discussion-item p {
+        font-size: 0.9rem;
+    }
+}
 
 /* Mobile Responsive */
 @media (max-width: 600px) {
