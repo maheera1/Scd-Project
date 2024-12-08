@@ -10,7 +10,7 @@ const studentSchema = new mongoose.Schema({
   bookmarks: [
     {
       groupId: { type: mongoose.Schema.Types.ObjectId, ref: 'Group', required: true },
-      resourceIndex: { type: Number, required: false }, // Index of the resource in the group's resources array
+      resourceIndex: { type: Number, required: false }, 
       discussionId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Discussion',
@@ -21,17 +21,17 @@ const studentSchema = new mongoose.Schema({
     {
       title: { type: String, required: true },
       content: { type: String, required: true },
-      tags: [String], // Tags for easy categorization (e.g., subject, session)
+      tags: [String], 
       createdBy: { 
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Student', // Reference to the student who created the note
+        ref: 'Student', 
         required: true
       },
       createdAt: { type: Date, default: Date.now },
       updatedAt: { type: Date, default: Date.now },
     }
   ],
-  doneResources: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Resource' }] // New field for done resources
+  doneResources: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Resource' }] 
 });
 
 

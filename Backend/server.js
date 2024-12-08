@@ -3,15 +3,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const path = require('path');
-const authRoutes = require('./routes/authRoutes'); // Import auth routes
+const authRoutes = require('./routes/authRoutes'); 
 const notesRoutes = require('./routes/notesRoutes'); 
 const notificationRoutes = require('./routes/notifications'); 
 
 const app = express();
 
-// Middleware
-app.use(express.json()); // To parse JSON data in requests
-app.use(cors()); // To handle cross-origin requests
+
+app.use(express.json()); 
+app.use(cors());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI, {
@@ -21,12 +21,11 @@ mongoose.connect(process.env.MONGO_URI, {
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
-// Test Route
+
 app.get('/', (req, res) => {
   res.send('Backend is running!');
 });
 
-// Use authentication routes for /api/auth (sign-up and login)
 app.use('/api/auth', authRoutes);
 
 const studentRoutes = require('./routes/studentRoutes');
@@ -34,7 +33,7 @@ app.use('/api/students', studentRoutes);
 
 const groupRoutes = require('./routes/groupRoutes');
 
-app.use('/api/groups', groupRoutes); // Prefix all group routes with /api/groups
+app.use('/api/groups', groupRoutes); 
 app.use('/api/notes', notesRoutes); 
 app.use('/api/notification', notificationRoutes); 
 

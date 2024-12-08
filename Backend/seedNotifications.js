@@ -3,12 +3,10 @@ const Notification = require('./models/Notification');
 require('dotenv').config();
 const seedNotifications = async () => {
   try {
-    // Connect to the database
+   
     await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-    
 
-    // Create mock notifications
     const notifications = [
       {
         title: 'Study Session Reminder',
@@ -40,7 +38,7 @@ const seedNotifications = async () => {
       },
     ];
 
-    // Insert mock notifications into the database
+   
     await Notification.insertMany(notifications);
     console.log('Mock notifications seeded successfully');
     mongoose.connection.close();

@@ -1,6 +1,5 @@
 // models/Notification.js
 const mongoose = require('mongoose');
-
 const notificationSchema = new mongoose.Schema(
   {
     title: {
@@ -19,8 +18,8 @@ const notificationSchema = new mongoose.Schema(
       enum: ['study-session', 'deadline', 'group-activity', 'zoom-meeting'],
     },
     link: {
-      type: String, // Link for Zoom meeting or any other links
-      required: false, // Optional for other types
+      type: String, 
+      required: false, 
     },
     sentBy: {
         type: String,

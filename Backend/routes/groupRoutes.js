@@ -4,11 +4,10 @@ const Student = require('../models/Student');
 const path = require('path');
 const fs = require('fs');
 const mongoose = require('mongoose');
-
 const { protect } = require('../middleware/authMiddleware');
 const router = express.Router();
 
-// Get all groups 
+
 router.get('/', async (req, res) => {
   try {
     const groups = await Group.find();
@@ -18,7 +17,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Get a specific group by ID 
+
 router.get('/:groupId', async (req, res) => {
   try {
     const group = await Group.findById(req.params.groupId);
@@ -31,31 +30,27 @@ router.get('/:groupId', async (req, res) => {
   }
 });
 
-// Join a group 
+
 router.post('/:groupId/join', protect, async (req, res) => {
   try {
-    // Retrieve the group by ID
+   
     const group = await Group.findById(req.params.groupId);
     if (!group) {
       return res.status(404).json({ message: 'Group not found' });
     }
 
-    // Find the student from the JWT token
-    const student = await Student.findById(req.student._id);  // Using the student ID from the decoded token
+    const student = await Student.findById(req.student._id);
     if (!student) {
       return res.status(404).json({ message: 'Student not found' });
     }
 
-    // Check if the group is already in the student's groupId field
     if (student.groupId.includes(group._id)) {
       return res.status(400).json({ message: 'You are already part of this group' });
     }
 
-    // Add the group to the student's groupId field
+    
     student.groupId.push(group._id);
     await student.save();
-
-    // Add the student to the group's members field
     group.members.push(student._id);
     await group.save();
 
@@ -67,38 +62,33 @@ router.post('/:groupId/join', protect, async (req, res) => {
 });
 
 
-// Assuming 'protect' is middleware to validate the student
+
 router.get('/:groupId/resources/:resourceId/download', protect, async (req, res) => {
   try {
-    // Fetch the group by groupId
+
     const group = await Group.findById(req.params.groupId);
     if (!group) {
       return res.status(404).json({ message: 'Group not found' });
     }
 
-    // Fetch the student by their ID (this comes from the 'protect' middleware)
     const student = await Student.findById(req.student._id);
     if (!student) {
       return res.status(404).json({ message: 'Student not found' });
     }
 
-    // Check if the student is part of the group
     if (!student.groupId.includes(group._id)) {
       return res.status(403).json({ message: 'You must join the group before downloading resources' });
     }
 
-    // Convert resourceId from string to ObjectId using 'new'
-    const resourceId = new mongoose.Types.ObjectId(req.params.resourceId);  // Use 'new' here
+    const resourceId = new mongoose.Types.ObjectId(req.params.resourceId);  
 
-    // Find the resource by its ObjectId
     const resource = group.resources.find(r => r.resourceId.toString() === resourceId.toString());
     if (!resource) {
       return res.status(404).json({ message: 'Resource not found' });
     }
 
-    // If the resource type is 'pdf', send the file
     if (resource.type === 'pdf') {
-      const filePath = path.join(__dirname, '..', resource.filePath); // Construct file path
+      const filePath = path.join(__dirname, '..', resource.filePath); 
       if (fs.existsSync(filePath)) {
         return res.download(filePath);
       } else {
@@ -114,30 +104,27 @@ router.get('/:groupId/resources/:resourceId/download', protect, async (req, res)
 });
 
 
-// Create a discussion within a group
 router.post('/:groupId/discussions', protect, async (req, res) => {
   try {
-    // Retrieve the group by ID
+    
     const group = await Group.findById(req.params.groupId);
     if (!group) {
       console.error(`Group not found: ${req.params.groupId}`);
       return res.status(404).json({ message: 'Group not found' });
     }
 
-    // Find the student from the JWT token
-    const student = await Student.findById(req.student._id);  // Using the student ID from the decoded token
+
+    const student = await Student.findById(req.student._id);  
     if (!student) {
       console.error(`Student not found: ${req.student._id}`);
       return res.status(404).json({ message: 'Student not found' });
     }
 
-    // Check if the student has joined the group
     if (!student.groupId.includes(group._id)) {
       console.error(`Student ${req.student._id} has not joined group ${group._id}`);
       return res.status(403).json({ message: 'You must join the group before creating a discussion' });
     }
 
-    // Extract title and body from the request body
     const { title, body } = req.body;
 
     if (!title || !body) {
@@ -145,14 +132,12 @@ router.post('/:groupId/discussions', protect, async (req, res) => {
       return res.status(400).json({ message: 'Title and body are required' });
     }
 
-    // Create the new discussion
     const newDiscussion = {
       title,
       body,
       createdBy: req.student._id,
     };
 
-    // Add the discussion to the group's discussions array
     group.discussions.push(newDiscussion);
     await group.save();
 
@@ -163,7 +148,6 @@ router.post('/:groupId/discussions', protect, async (req, res) => {
   }
 });
 
-// Get discussions in a group
 router.get('/:groupId/discussions', async (req, res) => {
   try {
     const group = await Group.findById(req.params.groupId);
@@ -177,7 +161,6 @@ router.get('/:groupId/discussions', async (req, res) => {
   }
 });
 
-// Post a comment on a discussion
 router.post('/:groupId/discussions/:discussionId/comments', protect, async (req, res) => {
   try {
     const { text } = req.body;
@@ -186,13 +169,11 @@ router.post('/:groupId/discussions/:discussionId/comments', protect, async (req,
       return res.status(400).json({ message: 'Text for the comment is required' });
     }
 
-    // Find the group by ID
     const group = await Group.findById(req.params.groupId);
     if (!group) {
       return res.status(404).json({ message: 'Group not found' });
     }
 
-    // Check if the student has joined the group
     const student = await Student.findById(req.student._id);
     if (!student) {
       return res.status(404).json({ message: 'Student not found' });
@@ -202,13 +183,11 @@ router.post('/:groupId/discussions/:discussionId/comments', protect, async (req,
       return res.status(403).json({ message: 'You must join the group before commenting on discussions' });
     }
 
-    // Find the discussion within the group
     const discussion = group.discussions.id(req.params.discussionId);
     if (!discussion) {
       return res.status(404).json({ message: 'Discussion not found' });
     }
 
-    // Add the comment to the discussion
     discussion.comments.push({
       studentId: req.student._id,
       comment: text,
@@ -216,7 +195,7 @@ router.post('/:groupId/discussions/:discussionId/comments', protect, async (req,
 
     await group.save();
 
-    // Return the updated discussion
+  
     res.status(201).json(discussion);
   } catch (error) {
     console.error(error);
@@ -225,8 +204,6 @@ router.post('/:groupId/discussions/:discussionId/comments', protect, async (req,
 });
 
 
-
-// Get all comments for a specific discussion in a group
 router.get('/:groupId/discussions/:discussionId/comments', protect, async (req, res) => {
   try {
     // Find the group by ID
@@ -235,24 +212,24 @@ router.get('/:groupId/discussions/:discussionId/comments', protect, async (req, 
       return res.status(404).json({ message: 'Group not found' });
     }
 
-    // Find the student from the JWT token
+    
     const student = await Student.findById(req.student._id);
     if (!student) {
       return res.status(404).json({ message: 'Student not found' });
     }
 
-    // Check if the student has joined the group
+  
     if (!student.groupId.includes(group._id)) {
       return res.status(403).json({ message: 'You must join the group before viewing comments' });
     }
 
-    // Find the discussion within the group
+   
     const discussion = group.discussions.id(req.params.discussionId);
     if (!discussion) {
       return res.status(404).json({ message: 'Discussion not found' });
     }
 
-    // Return all the comments of the discussion
+    
     res.status(200).json(discussion.comments);
   } catch (error) {
     console.error(error);
@@ -260,27 +237,24 @@ router.get('/:groupId/discussions/:discussionId/comments', protect, async (req, 
   }
 });
 
-// Get all resources in a group (only if student has joined the group)
+
 router.get('/:groupId/resources', protect, async (req, res) => {
   try {
-    // Retrieve the group by ID
+    
     const group = await Group.findById(req.params.groupId);
     if (!group) {
       return res.status(404).json({ message: 'Group not found' });
     }
 
-    // Find the student from the JWT token
-    const student = await Student.findById(req.student._id);  // Using the student ID from the decoded token
+
+    const student = await Student.findById(req.student._id); 
     if (!student) {
       return res.status(404).json({ message: 'Student not found' });
     }
-
-    // Check if the student has joined the group
     if (!student.groupId.includes(group._id)) {
       return res.status(403).json({ message: 'You must join the group before accessing resources' });
     }
 
-    // Return all the resources of the group
     res.status(200).json(group.resources);
   } catch (error) {
     console.error(error);
@@ -288,7 +262,7 @@ router.get('/:groupId/resources', protect, async (req, res) => {
   }
 });
 
-// Get all groups the student has not joined
+
 
 
 module.exports = router;
