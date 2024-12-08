@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
+import './CreateDiscussion.css';
 
 const CreateDiscussion = () => {
   const { groupId } = useParams(); // Get groupId from URL
@@ -51,7 +52,7 @@ const CreateDiscussion = () => {
 
   return (
     <div className="create-discussion">
-      <h2>Create a New Discussion</h2>
+      <h2>Create aaaaa New Discussion</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Title:</label>

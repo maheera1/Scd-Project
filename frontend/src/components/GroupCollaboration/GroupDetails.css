@@ -1,166 +1,266 @@
-/* GroupDetails.css */
-
 /* General container styling */
 .group-details-container {
     padding: 30px;
     max-width: 900px;
     margin: 40px auto;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     font-family: 'Arial', sans-serif;
-  }
-  
-  .group-details-container h2 {
-    font-size: 2.5rem;
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Group title and description */
+.group-details-container h2 {
+    font-size: 2.8rem;
     font-weight: 700;
-    margin-bottom: 20px;
-    color: #2c3e50;
+    color: #3d3d3d;
     text-align: center;
-  }
-  
-  .group-details-container p {
-    font-size: 1.2rem;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+.group-details-container p {
+    font-size: 1.3rem;
     line-height: 1.8;
     color: #7f8c8d;
     text-align: center;
     margin-bottom: 25px;
-  }
-  
-  /* Section titles */
-  .group-details-container h3 {
-    font-size: 1.8rem;
+    font-weight: 300;
+}
+
+/* Section titles */
+.group-details-container h3 {
+    font-size: 2rem;
     margin-top: 30px;
     font-weight: 600;
-    color: #34495e;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 10px;
-  }
-  
-  /* List styles for resources and discussions */
-  .group-details-container ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .group-details-container li {
-    margin-bottom: 20px;
-  }
-  
-  /* Resource link styles */
-  .group-details-container a {
     color: #3498db;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-  }
-  
-  .group-details-container a:hover {
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect on section titles */
+.group-details-container h3:hover {
     color: #2980b9;
-    text-decoration: underline;
-  }
-  
-  .group-details-container .resource-link {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: white;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-  }
-  
-  .group-details-container .resource-link:hover {
-    background-color: #2980b9;
-  }
-  
-  /* Loading and error messages */
-  .group-details-container .loading-message,
-  .group-details-container .error-message {
-    font-size: 1.2rem;
-    color: #e74c3c;
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .group-details-container .error-message {
-    color: #c0392b;
-  }
-  
-  /* Discussion item styling */
-  .group-details-container .discussion-item {
-    margin-bottom: 20px;
-    background-color: #ecf0f1;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  
-  .group-details-container .discussion-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  
-  .group-details-container .discussion-item h4 {
-    font-size: 1.4rem;
+    border-color: #2980b9;
+}
+
+/* Discussion item styling */
+.group-details-container .discussion-item {
+    margin-bottom: 25px;
+    background-color: #f1f3f5;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for discussion items */
+.group-details-container .discussion-item:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    transform: translateY(-8px);
+}
+
+/* Discussion title and body */
+.group-details-container .discussion-item h4 {
+    font-size: 1.8rem;
     color: #2c3e50;
-    margin-bottom: 10px;
-  }
-  
-  .group-details-container .discussion-item p {
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.group-details-container .discussion-item p {
     font-size: 1.1rem;
     color: #7f8c8d;
     line-height: 1.6;
-  }
-  
-  .group-details-container .comments-list {
-    margin-top: 15px;
-    padding-left: 20px;
-  }
-  
-  .group-details-container .comment-item {
-    margin-top: 12px;
-    padding: 12px;
-    background-color: #f4f6f7;
-    border-radius: 5px;
-  }
-  
-  .group-details-container .comment-item p {
-    font-size: 1.1rem;
+}
+
+/* New discussion form styling */
+.create-discussion-form {
+    padding: 30px;
+    background-color: #f7f9f9;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect on the form */
+.create-discussion-form:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.create-discussion-form h3 {
+    font-size: 1.8rem;
+    color: #3498db;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.create-discussion-form input,
+.create-discussion-form textarea {
+    padding: 15px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+    background-color: #fff;
     color: #34495e;
-  }
-  
-  /* Responsive design */
-  @media screen and (max-width: 768px) {
+}
+
+.create-discussion-form input:focus,
+.create-discussion-form textarea:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+}
+
+.create-discussion-form button {
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-discussion-form button:hover {
+    background-color: #2980b9;
+}
+
+.create-discussion-form button:disabled {
+    background-color: #7f8c8d;
+    cursor: not-allowed;
+}
+
+/* Comments section styling */
+.group-details-container .add-comment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.group-details-container .add-comment input {
+    width: 80%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 1.1rem;
+    color: #2c3e50;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+.group-details-container .add-comment input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+}
+
+.group-details-container .add-comment button {
+    width: 18%;
+    padding: 12px;
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.group-details-container .add-comment button:hover {
+    background-color: #2980b9;
+}
+
+/* Comments List */
+.group-details-container .comments-list {
+    margin-top: 15px;
+    padding-left: 25px;
+    padding-bottom: 20px;
+}
+
+.group-details-container .comment-item {
+    margin-top: 12px;
+    padding: 18px;
+    background-color: #ecf0f1;
+    border-radius: 12px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.group-details-container .comment-item:hover {
+    background-color: #f0f4f7;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.group-details-container .comment-item p {
+    color: #34495e;
+}
+
+.group-details-container .comment-item small {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+/* Buttons */
+.group-details-container button {
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.group-details-container button:hover {
+    background-color: #2980b9;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
     .group-details-container {
-      padding: 20px;
-      margin: 20px;
+        padding: 20px;
+        margin: 20px;
     }
-  
+
     .group-details-container h2 {
-      font-size: 2rem;
+        font-size: 2.3rem;
     }
-  
+
     .group-details-container h3 {
-      font-size: 1.6rem;
+        font-size: 1.6rem;
     }
-  
-    .group-details-container .resource-link {
-      padding: 8px 16px;
-      font-size: 0.9rem;
+
+    .create-discussion-form input,
+    .create-discussion-form textarea {
+        font-size: 1rem;
     }
-  
+
     .group-details-container .discussion-item {
-      padding: 15px;
+        padding: 18px;
     }
-  
+
     .group-details-container .comment-item {
-      padding: 10px;
+        padding: 12px;
     }
-  }
-  
+}

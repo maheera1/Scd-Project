@@ -4,10 +4,14 @@
     margin: auto;
     background-color: #f4f4f4;
     border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
   
   .create-discussion-container h2 {
     text-align: center;
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
   }
   
   .create-discussion-container form {
@@ -18,15 +22,24 @@
   .create-discussion-container label {
     margin: 5px 0;
     font-size: 1.2rem;
+    color: #34495e;
   }
   
   .create-discussion-container input,
   .create-discussion-container textarea {
     padding: 10px;
-    margin: 5px 0;
+    margin: 10px 0;
     font-size: 1rem;
     border-radius: 4px;
     border: 1px solid #ccc;
+    background-color: #fff;
+    color: #34495e;
+  }
+  
+  .create-discussion-container input:focus,
+  .create-discussion-container textarea:focus {
+    outline: none;
+    border-color: #3498db;
   }
   
   .create-discussion-container button {
@@ -37,6 +50,11 @@
     border-radius: 4px;
     font-size: 1rem;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .create-discussion-container button:hover {
+    background-color: #2980b9;
   }
   
   .create-discussion-container button:disabled {
@@ -47,5 +65,17 @@
     color: red;
     font-size: 1.2rem;
     text-align: center;
+    margin-top: 15px;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .create-discussion-container {
+      padding: 15px;
+      max-width: 100%;
+    }
+  
+    .create-discussion-container h2 {
+      font-size: 1.8rem;
+    }
   }
   
