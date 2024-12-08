@@ -178,5 +178,171 @@ router.get('/resources', protect, async (req, res) => {
     res.status(500).json({ message: 'Error fetching resources' });
   }
 });
+router.get('/progress', protect, async (req, res) => {
+  try {
+    // Fetch the student
+    const student = await Student.findById(req.student._id).populate('groupId');
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    // Count the discussions created by the student
+    let discussionCount = 0;
+    const groups = await Group.find({ _id: { $in: student.groupId } });
+    groups.forEach(group => {
+      group.discussions.forEach(discussion => {
+        if (discussion.createdBy.toString() === req.student._id.toString()) {
+          discussionCount++;
+        }
+      });
+    });
+
+    // Fetch all resources across the student's groups
+    const allResources = [];
+    groups.forEach(group => {
+      group.resources.forEach(resource => {
+        allResources.push({
+          resourceId: resource.resourceId,
+          type: resource.type,
+          url: resource.url,
+          filePath: resource.filePath,
+          description: resource.description,
+          groupName: group.name,
+          groupId: group._id,
+          done: student.doneResources.includes(resource.resourceId.toString()) // Check if the resource is marked as done
+        });
+      });
+    });
+
+    // Respond with the discussion count and resources
+    res.status(200).json({
+      discussionsCreated: discussionCount,
+      resources: allResources,
+      doneResourcesCount: student.doneResources.length // Count how many resources are marked as done
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching progress data' });
+  }
+});
+
+// Route to mark a resource as done
+router.post('/resources/:resourceId/done', protect, async (req, res) => {
+  try {
+    const { resourceId } = req.params;
+
+    // Find the student
+    const student = await Student.findById(req.student._id);
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    // Check if the resource is already marked as done
+    if (student.doneResources.includes(resourceId)) {
+      return res.status(400).json({ message: 'Resource already marked as done' });
+    }
+
+    // Add the resource to the doneResources array in the student schema
+    student.doneResources.push(resourceId);
+    await student.save();
+
+    // Find the group that the resource belongs to and update its 'done' status
+    const group = await Group.findOne({ 'resources.resourceId': resourceId });
+    if (!group) {
+      return res.status(404).json({ message: 'Group not found for this resource' });
+    }
+
+    // Update the resource's 'done' status in the Group schema
+    await Group.updateOne(
+      { 'resources.resourceId': resourceId },
+      { $set: { 'resources.$.done': true } } // Mark this resource as done
+    );
+
+    res.status(200).json({ 
+      message: 'Resource marked as done', 
+      doneResourcesCount: student.doneResources.length 
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error marking resource as done' });
+  }
+});
+router.post('/resources/:resourceId/notdone', protect, async (req, res) => {
+  try {
+    const { resourceId } = req.params;
+
+    // Find the student
+    const student = await Student.findById(req.student._id);
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    // Check if the resource is not marked as done yet
+    if (!student.doneResources.includes(resourceId)) {
+      return res.status(400).json({ message: 'Resource not marked as done yet' });
+    }
+
+    // Remove the resource from the doneResources array in the student schema
+    student.doneResources = student.doneResources.filter(id => id.toString() !== resourceId);
+    await student.save();
+
+    // Find the group that the resource belongs to and update its 'done' status to false
+    const group = await Group.findOne({ 'resources.resourceId': resourceId });
+    if (!group) {
+      return res.status(404).json({ message: 'Group not found for this resource' });
+    }
+
+    // Update the resource's 'done' status in the Group schema to false
+    await Group.updateOne(
+      { 'resources.resourceId': resourceId },
+      { $set: { 'resources.$.done': false } } // Mark this resource as not done
+    );
+
+    res.status(200).json({ 
+      message: 'Resource marked as not done', 
+      doneResourcesCount: student.doneResources.length 
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error marking resource as not done' });
+  }
+});
+router.get('/resources/:resourceId/status', protect, async (req, res) => {
+  try {
+    const { resourceId } = req.params;
+
+    // Find the student
+    const student = await Student.findById(req.student._id);
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    // Check if the resource is marked as done in the Student schema
+    const isResourceDone = student.doneResources.includes(resourceId);
+
+    // Find the group that the resource belongs to and check its 'done' status
+    const group = await Group.findOne({ 'resources.resourceId': resourceId });
+    if (!group) {
+      return res.status(404).json({ message: 'Group not found for this resource' });
+    }
+
+    // Check the 'done' status of the resource in the Group schema
+    const resource = group.resources.find(r => r.resourceId.toString() === resourceId.toString());
+    if (!resource) {
+      return res.status(404).json({ message: 'Resource not found in this group' });
+    }
+
+    // Send the resource status (done or not done)
+    res.status(200).json({
+      resourceId,
+      studentDoneStatus: isResourceDone ? 'done' : 'not done',
+      groupDoneStatus: resource.done ? 'done' : 'not done'
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching resource status' });
+  }
+});
 
 module.exports = router;

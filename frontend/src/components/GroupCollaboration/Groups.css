@@ -1,5 +1,5 @@
-/* General container styling */
-.group-container {
+/* General container styling for the Groups page */
+.groups-container {
     margin: 20px;
     padding: 20px;
     background-color: #f9f9f9;
@@ -7,46 +7,62 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.group-container h1 {
-    font-size: 2em;
-    color: #333;
+/* Title styling for the Groups page */
+.groups-container h1 {
+    font-size: 2.5em;
+    color: #2c9294;
     margin-bottom: 20px;
 }
 
 /* Loading and error message styling */
-.group-loading-message,
-.group-error-message {
+.groups-loading-message,
+.groups-error-message {
     font-size: 1.2em;
     color: #e74c3c;
+    text-align: center;
 }
 
-/* List styling */
-.group-container ul {
+/* Group list styling */
+.groups-container ul {
     list-style: none;
     padding: 0;
 }
 
-.group-container li {
+.groups-container .group-item {
     background-color: #fff;
     border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 1.1em;
+    font-size: 1.2em;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.groups-container .group-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Group name styling */
-.group-container li h2 {
-    font-size: 1.5em;
-    color: #333;
+.groups-container .group-item h2 {
+    font-size: 1.8em;
+    color: #1c5c5e;
+}
+
+/* Group description styling */
+.groups-container .group-item p {
+    font-size: 1em;
+    color: #7f8c8d;
 }
 
 /* No groups message styling */
-.group-container .no-groups {
+.groups-container .no-groups {
     font-size: 1.2em;
     color: #7f8c8d;
     font-style: italic;
+    text-align: center;
 }

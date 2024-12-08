@@ -18,7 +18,8 @@ const groupSchema = new mongoose.Schema({
       url: { type: String },  // URL for links (e.g., external links)
       filePath: { type: String },  // Path for PDF or note files (if uploaded locally)
       description: { type: String },  // Optional description for the resource
-      _id: false
+      _id: false,
+      done: { type: Boolean, default: false }
     }
   ],
   discussions: [

@@ -27,6 +27,7 @@ const studentSchema = new mongoose.Schema({
       updatedAt: { type: Date, default: Date.now },
     }
   ],
+  doneResources: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Resource' }] // New field for done resources
 });
 
 

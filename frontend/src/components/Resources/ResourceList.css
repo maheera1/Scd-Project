@@ -1,88 +1,181 @@
 /* Overall container for the resource list */
 .resource-list {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
+    padding: 30px;
+    background-color: #f9fbfd;
+    border-radius: 15px;
     max-width: 1200px;
-    margin: 0 auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Title of the page */
-  .resource-list h2 {
+    margin: 30px auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+/* Title of the page */
+.resource-list h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #184d5e;
+    margin-bottom: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+/* Adding a decorative underline to the title */
+.resource-list h2::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background: #2c9294;
+    margin: 10px auto;
+    border-radius: 2px;
+}
+
+/* Section headers for Not Done and Done */
+.resource-list h3 {
     font-size: 28px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  /* Styling each list item */
-  .resource-list ul {
+    color: #2c9294;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #2c9294;
+    padding-bottom: 5px;
+}
+
+/* Styling each list item */
+.resource-list ul {
     list-style-type: none;
     padding: 0;
-  }
-  
-  .resource-item {
-    background-color: white;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-  }
-  
-  .resource-item:hover {
-    transform: scale(1.02);
-  }
-  
-  /* Styling for the group name */
-  .resource-item h3 {
-    font-size: 20px;
-    color: #1f4e5f;
     margin: 0;
+}
+
+.resource-list .resource-item {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.resource-list .resource-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for the group name */
+.resource-list .resource-item h4 {
+    font-size: 22px;
+    color: #184d5e;
+    margin: 0 0 10px;
     font-weight: bold;
-    margin-bottom: 8px;
-  }
-  
-  /* Description text */
-  .resource-item p {
-    font-size: 14px;
-    color: #555;
+}
+
+/* Description text */
+.resource-list .resource-item p {
+    font-size: 16px;
+    color: #7f8c8d;
     margin: 10px 0;
-  }
-  
-  /* Styling for links */
-  .resource-item a {
+    line-height: 1.5;
+}
+
+/* Button common styles */
+.resource-list .resource-item button,
+.resource-list .resource-item a {
     display: inline-block;
-    padding: 8px 12px;
-    margin-top: 10px;
-    font-size: 14px;
-    color: white;
-    background-color: #007bff;
-    border-radius: 4px;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
     text-decoration: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  /* Hover effect for the links */
-  .resource-item a:hover {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+/* Styling for the View Resource link */
+.resource-list .resource-item a {
+    background-color: #007bff;
+}
+
+.resource-list .resource-item a:hover {
     background-color: #0056b3;
-  }
-  
-  /* Styling for the "Download" link */
-  .resource-item a[download] {
+    transform: scale(1.05);
+}
+
+/* Styling for the download button */
+.resource-list .resource-item .download-button {
     background-color: #28a745;
-  }
-  
-  .resource-item a[download]:hover {
+}
+
+.resource-list .resource-item .download-button:hover {
     background-color: #218838;
-  }
-  
-  /* Loading/Error styles */
-  .loading, .error {
+    transform: scale(1.05);
+}
+
+/* Styling for the Mark as Done button */
+.resource-list .resource-item .mark-done-button {
+    background-color: #ffc107;
+}
+
+.resource-list .resource-item .mark-done-button:hover {
+    background-color: #e0a800;
+    transform: scale(1.05);
+}
+
+/* Styling for the Mark as Not Done button */
+.resource-list .resource-item .mark-not-done-button {
+    background-color: #dc3545;
+}
+
+.resource-list .resource-item .mark-not-done-button:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+/* Completed status label */
+.resource-list .resource-item span {
+    display: inline-block;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Loading/Error messages */
+.resource-list .loading, .resource-list .error {
     font-size: 18px;
-    color: #ff6347;
+    color: #e74c3c;
     text-align: center;
     margin-top: 20px;
-  }
-  
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .resource-list {
+        padding: 20px;
+    }
+
+    .resource-list h2 {
+        font-size: 28px;
+    }
+
+    .resource-list .resource-item {
+        padding: 15px;
+    }
+
+    .resource-list .resource-item h4 {
+        font-size: 20px;
+    }
+
+    .resource-list .resource-item button,
+    .resource-list .resource-item a {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}

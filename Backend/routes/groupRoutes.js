@@ -3,6 +3,8 @@ const Group = require('../models/Group');
 const Student = require('../models/Student');
 const path = require('path');
 const fs = require('fs');
+const mongoose = require('mongoose');
+
 const { protect } = require('../middleware/authMiddleware');
 const router = express.Router();
 
@@ -65,34 +67,40 @@ router.post('/:groupId/join', protect, async (req, res) => {
 });
 
 
+// Assuming 'protect' is middleware to validate the student
 router.get('/:groupId/resources/:resourceId/download', protect, async (req, res) => {
   try {
+    // Fetch the group by groupId
     const group = await Group.findById(req.params.groupId);
     if (!group) {
       return res.status(404).json({ message: 'Group not found' });
     }
 
+    // Fetch the student by their ID (this comes from the 'protect' middleware)
     const student = await Student.findById(req.student._id);
     if (!student) {
       return res.status(404).json({ message: 'Student not found' });
     }
 
+    // Check if the student is part of the group
     if (!student.groupId.includes(group._id)) {
       return res.status(403).json({ message: 'You must join the group before downloading resources' });
     }
 
-    // Find the resource by ID
-    const resource = group.resources.id(req.params.resourceId);
+    // Convert resourceId from string to ObjectId using 'new'
+    const resourceId = new mongoose.Types.ObjectId(req.params.resourceId);  // Use 'new' here
+
+    // Find the resource by its ObjectId
+    const resource = group.resources.find(r => r.resourceId.toString() === resourceId.toString());
     if (!resource) {
       return res.status(404).json({ message: 'Resource not found' });
     }
 
+    // If the resource type is 'pdf', send the file
     if (resource.type === 'pdf') {
-      // For PDF or files, send the file from the server
-      const filePath = path.join(__dirname, '..', resource.filePath);
-      console.log(filePath);
+      const filePath = path.join(__dirname, '..', resource.filePath); // Construct file path
       if (fs.existsSync(filePath)) {
-        res.download(filePath);
+        return res.download(filePath);
       } else {
         return res.status(404).json({ message: 'File not found' });
       }
@@ -100,9 +108,11 @@ router.get('/:groupId/resources/:resourceId/download', protect, async (req, res)
       return res.status(400).json({ message: 'Invalid resource type for download' });
     }
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: 'Error downloading resource' });
   }
 });
+
 
 // Create a discussion within a group
 router.post('/:groupId/discussions', protect, async (req, res) => {

@@ -5,6 +5,7 @@ const cors = require('cors');
 const path = require('path');
 const authRoutes = require('./routes/authRoutes'); // Import auth routes
 const notesRoutes = require('./routes/notesRoutes'); 
+
 const app = express();
 
 // Middleware

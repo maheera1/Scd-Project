@@ -1,0 +1,124 @@
+/* ProgressDashboard.css */
+
+/* General Container Styles */
+.progress-dashboard-container {
+    background-color: #f4f4f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 20px auto;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    color: #444;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  /* Progress Summary Section */
+  .progress-summary {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 15px 25px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .progress-summary p {
+    font-size: 1rem;
+    color: #555;
+    font-weight: 500;
+    margin: 0;
+  }
+  
+  /* Progress Resource List */
+  .progress-resource-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .progress-resource-item {
+    background-color: #fff;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .progress-resource-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .progress-resource-item div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .progress-resource-item h4 {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 0;
+  }
+  
+  .progress-resource-item a {
+    color: #0066cc;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+  }
+  
+  .progress-resource-item a:hover {
+    color: #004bb5;
+    text-decoration: underline;
+  }
+  
+  .progress-resource-item p {
+    font-size: 1rem;
+    color: #777;
+    margin-top: 8px;
+  }
+  
+  /* Loading and Error States */
+  .loading,
+  .error {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #555;
+  }
+  
+  .error {
+    color: #d9534f;
+  }
+  
+  .loading {
+    color: #f0ad4e;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .progress-summary {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .progress-summary p {
+      margin-bottom: 10px;
+    }
+  }
+  
