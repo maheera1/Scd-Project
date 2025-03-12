@@ -2,7 +2,7 @@
 *Collaborative Learning Hub*  
 
 ## Description  
-Hello! Brainbox is a modern learning platform designed to enhance collaboration between students and educators.  
+Hello! Brainbox is a modern learning platform designed to enhance collaboration between students & educators.  
 The **Student Panel** empowers learners by providing essential tools for:  
 - Group collaboration.  
 - Resource access.  
@@ -15,7 +15,7 @@ The **Student Panel** empowers learners by providing essential tools for:
 ### 1. GroupCollaboration feature  
 - Join and participate in study groups.  
 - Access shared resources & discussions.  
-- Actively contribute to the group by posting comments and sharing ideas.  
+- Actively contribute to the group by posting comments & sharing ideas.  
 
 ### 2. Resource Access  
 - View & download study materials (PDFs, notes, links) provided by teachers.  
@@ -28,7 +28,7 @@ The **Student Panel** empowers learners by providing essential tools for:
   - Group activities and announcements.  
 
 ### 4. Bookmarking and Favorites  
-- Bookmark critical resources, sessions, and discussions for future reference.  
+- Bookmark critical resources, sessions and discussions for future reference.  
 
 ### 5. Progress Tracking Dashboard  
 - Monitor personal learning achievements:  
@@ -37,7 +37,7 @@ The **Student Panel** empowers learners by providing essential tools for:
   - Group contributions.  
 
 ### 6. Notes Management  
-- Create, organize, and tag personal notes.  
+- Create and organize, and tag personal notes.  
 - Link notes to specific subjects or group sessions.  
 
 
