@@ -1,4 +1,4 @@
-# Brainbox collaboration learning hub - Student Panel  
+# Brainbox collaboration learning hub from main branch - Student Panel  
 *Collaborative Learning Hub*  
 
 ## Description  
@@ -7,7 +7,7 @@ The **Student Panel** empowers learners by providing essential tools for:
 - Group collaboration.  
 - Resource access.  
 - Progress tracking.
-- Welcome to BrainBox! - Updated from main branch
+
   
   
 
