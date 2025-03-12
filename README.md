@@ -6,7 +6,9 @@ Hello! Brainbox is a modern learning platform designed to enhance collaboration 
 The **Student Panel** empowers learners by providing essential tools for:  
 - Group collaboration.  
 - Resource access.  
-- Progress tracking.  
+- Progress tracking.
+- Welcome to BrainBox! - Updated from main branch
+  
   
 
 ---
