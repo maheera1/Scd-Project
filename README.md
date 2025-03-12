@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # Brainbox collaboration learning hub from main branch (merged branch) - Student Panel  
-=======
-# Brainbox  from conflict branch- Student Panel  
->>>>>>> conflict-branch
 *Collaborative Learning Hub*  
 
 ## Description  
