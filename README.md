@@ -1,4 +1,4 @@
-# Brainbox  from conflict branch- Student Panel  
+# Brainbox collaboration learning hub from main branch (merged branch) - Student Panel  
 *Collaborative Learning Hub*  
 
 ## Description  
@@ -6,13 +6,15 @@ Hello! Brainbox is a modern learning platform designed to enhance collaboration 
 The **Student Panel** empowers learners by providing essential tools for:  
 - Group collaboration.  
 - Resource access.  
-- Progress tracking.  
+- Progress tracking.
+
+  
   
 
 ---
 
 ## Features of the Student Panel  
-### 1. GroupCollaboration  
+### 1. GroupCollaboration feature  
 - Join and participate in study groups.  
 - Access shared resources & discussions.  
 - Actively contribute to the group by posting comments & sharing ideas.  
