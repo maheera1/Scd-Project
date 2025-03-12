@@ -2,7 +2,7 @@
 *Collaborative Learning Hub*  
 
 ## Description  
-Brainbox is a modern learning platform designed to enhance collaboration between students and educators.  
+Hello! Brainbox is a modern learning platform designed to enhance collaboration between students and educators.  
 The **Student Panel** empowers learners by providing essential tools for:  
 - Group collaboration.  
 - Resource access.  
@@ -12,13 +12,13 @@ The **Student Panel** empowers learners by providing essential tools for:
 ---
 
 ## Features of the Student Panel  
-### 1. Group Collaboration  
+### 1. GroupCollaboration  
 - Join and participate in study groups.  
-- Access shared resources and discussions.  
+- Access shared resources & discussions.  
 - Actively contribute to the group by posting comments and sharing ideas.  
 
 ### 2. Resource Access  
-- View and download study materials (PDFs, notes, links) provided by teachers.  
+- View & download study materials (PDFs, notes, links) provided by teachers.  
 - Save resources for offline review.  
 
 ### 3. Reminders and Notifications  
