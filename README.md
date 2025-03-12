@@ -1,4 +1,4 @@
-# Brainbox - Student Panel  
+# Brainbox collaboration learning hub - Student Panel  
 *Collaborative Learning Hub*  
 
 ## Description  
@@ -12,7 +12,7 @@ The **Student Panel** empowers learners by providing essential tools for:
 ---
 
 ## Features of the Student Panel  
-### 1. GroupCollaboration  
+### 1. GroupCollaboration feature  
 - Join and participate in study groups.  
 - Access shared resources & discussions.  
 - Actively contribute to the group by posting comments and sharing ideas.  
