@@ -1,4 +1,4 @@
-# Brainbox - Student Panel  
+# Brainbox  from conflict branch- Student Panel  
 *Collaborative Learning Hub*  
 
 ## Description  
