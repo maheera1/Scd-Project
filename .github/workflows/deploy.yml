@@ -2,15 +2,15 @@ name: Build and Deploy to Minikube
 on:
   push:
     branches:
-      - main
+      - main  # Trigger the workflow on pushes to the main branch
 
 jobs:
   build-deploy:
-    runs-on: self-hosted
+    runs-on: self-hosted  # This tells GitHub Actions to use your self-hosted runner
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v3  # Checkout the repository code
 
     - name: Set up Docker to use Minikube's environment
       run: |
